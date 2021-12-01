@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -12,6 +13,7 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -29,6 +31,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 ext {
@@ -43,6 +48,9 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // Multidex
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     // Fragment
     implementation 'androidx.fragment:fragment-ktx:1.4.0'
@@ -60,6 +68,7 @@ dependencies {
 
     // Dagger - Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    annotationProcessor "com.google.dagger:hilt-compiler:$hilt_version"
 
     // Navigation
     api 'androidx.navigation:navigation-runtime-ktx:2.3.5'

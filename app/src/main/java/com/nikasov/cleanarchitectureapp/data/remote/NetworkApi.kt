@@ -6,7 +6,5 @@ import retrofit2.http.GET
 
 interface NetworkApi {
     @GET(NetworkUrl.GAMES)
-    fun getGamesList(
-
-    ): Response<GameListDto?>
+    fun getGamesList(): Response<GameListDto?>
 }
