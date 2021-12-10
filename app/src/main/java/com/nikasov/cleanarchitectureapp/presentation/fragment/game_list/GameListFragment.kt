@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.nikasov.cleanarchitectureapp.R
 import com.nikasov.cleanarchitectureapp.common.State
 import com.nikasov.cleanarchitectureapp.common.extensions.showToast
 import com.nikasov.cleanarchitectureapp.databinding.FragmentGameListBinding
@@ -13,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class GameListFragment: BaseFragment<FragmentGameListBinding>(R.layout.fragment_game_list) {
+class GameListFragment: BaseFragment<FragmentGameListBinding>(FragmentGameListBinding::inflate) {
 
     private val gameListViewModel: GameListViewModel by viewModels()
 

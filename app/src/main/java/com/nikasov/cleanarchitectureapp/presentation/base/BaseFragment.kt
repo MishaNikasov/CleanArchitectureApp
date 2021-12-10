@@ -1,6 +1,9 @@
 package com.nikasov.cleanarchitectureapp.presentation.base
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
@@ -12,10 +15,29 @@ import com.nikasov.cleanarchitectureapp.common.extensions.showToast
 import timber.log.Timber
 
 open class BaseFragment<FragmentBinding : ViewBinding>(
-    @LayoutRes layoutId: Int,
-) : Fragment(layoutId) {
+    private val binder: (LayoutInflater, ViewGroup?, Boolean) -> FragmentBinding
+) : Fragment() {
 
-    lateinit var binding: FragmentBinding
+    private var binding: FragmentBinding? = null
+
+    protected fun requireBinding(): FragmentBinding {
+        return checkNotNull(binding)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding = binder(inflater, container, false)
+        this.binding = binding
+        return binding.root
+    }
+
+    override fun onDestroy() {
+        binding = null
+        super.onDestroy()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

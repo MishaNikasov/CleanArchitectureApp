@@ -5,6 +5,7 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.nikasov.cleanarchitectureapp.common.Constants
 import com.nikasov.cleanarchitectureapp.data.remote.NetworkApi
+import com.nikasov.cleanarchitectureapp.data.remote.NetworkInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,8 +34,9 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(chuckerInterceptor: ChuckerInterceptor) : OkHttpClient{
+    fun provideOkHttpClient(chuckerInterceptor: ChuckerInterceptor, networkInterceptor: NetworkInterceptor) : OkHttpClient{
         return OkHttpClient.Builder()
+            .addInterceptor(networkInterceptor)
             .addNetworkInterceptor(chuckerInterceptor)
             .build()
     }
@@ -45,7 +47,6 @@ object NetworkModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(Constants.API_ENDPOINT)
-            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

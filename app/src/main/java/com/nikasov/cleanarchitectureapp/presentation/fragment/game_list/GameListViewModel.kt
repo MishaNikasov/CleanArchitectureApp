@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.nikasov.cleanarchitectureapp.common.DataState
 import com.nikasov.cleanarchitectureapp.common.State
 import com.nikasov.cleanarchitectureapp.domain.usecase.game.GameUseCases
-import com.nikasov.cleanarchitectureapp.domain.usecase.game.GetGamesListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -25,7 +25,7 @@ class GameListViewModel @Inject constructor(
     }
 
     private fun getGameList() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _state.emit(State.loading())
             when (val gameList = gameUseCases.getGamesListUseCase()) {
                 is DataState.Error -> _state.emit(State.error(gameList.errorModel))

@@ -6,16 +6,15 @@ import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Response
 
 data class ErrorModel(
-    var errorCode: String = "",
-    var errorMessage: String = ""
+    var error: String = ""
 ) {
 
     companion object {
-        fun getLocalError(msg: String) = ErrorModel(errorMessage = msg)
+        fun getLocalError(msg: String) = ErrorModel(error = msg)
     }
 
     @JvmName("funGetErrorMessage")
-    fun getErrorMessage(): String = errorMessage
+    fun getErrorMessage(): String = error
 }
 
 
