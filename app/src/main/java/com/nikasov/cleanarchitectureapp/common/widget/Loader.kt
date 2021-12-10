@@ -23,13 +23,13 @@ class Loader @JvmOverloads constructor(
     }
 
     private fun setupView() {
-        background = context.getResourceDrawable(R.color.white)
+        background = context.getResourceDrawable(R.color.link_black)
     }
 
     private fun setupLottie() {
         val lottieView = LottieAnimationView(context).apply {
             layoutParams = LayoutParams(
-                dpToPx(120f), dpToPx(120f), Gravity.CENTER
+                dpToPx(160f), dpToPx(160f), Gravity.CENTER
             )
             setAnimation(R.raw.loader)
             repeatCount = LottieDrawable.INFINITE

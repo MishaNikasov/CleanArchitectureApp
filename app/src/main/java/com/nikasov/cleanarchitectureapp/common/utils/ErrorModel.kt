@@ -11,6 +11,7 @@ data class ErrorModel(
 
     companion object {
         fun getLocalError(msg: String) = ErrorModel(error = msg)
+        fun emptyBodyError() = ErrorModel(error = "Empty response")
     }
 
     @JvmName("funGetErrorMessage")

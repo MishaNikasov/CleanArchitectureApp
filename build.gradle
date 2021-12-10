@@ -5,6 +5,8 @@ buildscript {
     ext.hilt_version = '2.38.1'
     ext.gradle_version = '7.0.4'
     ext.navigation_version = '2.3.5'
+    ext.paging_version = "3.1.0"
+
 
     repositories {
         google()

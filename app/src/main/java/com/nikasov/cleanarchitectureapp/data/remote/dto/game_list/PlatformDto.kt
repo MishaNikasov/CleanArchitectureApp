@@ -1,4 +1,4 @@
-package com.nikasov.cleanarchitectureapp.data.remote.dto
+package com.nikasov.cleanarchitectureapp.data.remote.dto.game_list
 
 import com.nikasov.cleanarchitectureapp.domain.model.Platform
 

@@ -1,5 +1,6 @@
 package com.nikasov.cleanarchitectureapp.presentation.fragment.game_list
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikasov.cleanarchitectureapp.common.utils.State
@@ -19,10 +20,6 @@ class GameListFragment: BaseFragment<FragmentGameListBinding>(FragmentGameListBi
     @Inject
     lateinit var gameListAdapter: GameListAdapter
 
-    override fun setData() {
-        gameListViewModel.getGameList()
-    }
-
     override fun setupViews() {
         requireBinding().gameRecycler.apply {
             adapter = gameListAdapter
@@ -31,25 +28,13 @@ class GameListFragment: BaseFragment<FragmentGameListBinding>(FragmentGameListBi
     }
 
     override fun setupViewModelCallbacks() {
-        gameListViewModel.state.collectWhenStarted(this) {state ->
-            when (state) {
-                is State.Loading -> {
-                    loadingState(true)
-                }
-                is State.Error -> {
-                    loadingState(false)
-                    errorState(state.errorModel)
-                }
-                is State.Successes -> {
-                    state.data ?: return@collectWhenStarted
-                    loadingState(false)
-                    setupGameList(state.data.gameList)
-                }
-            }
+        gameListViewModel.gameList.collectWhenStarted(this) { gameList ->
+            loadingState(false)
+            gameListAdapter.submitData(gameList)
         }
     }
 
-    private fun setupGameList(gameList: List<Game>) {
-        gameListAdapter.submitList(gameList)
+    override fun loadingState(isLoading: Boolean) {
+        requireBinding().loader.isVisible = isLoading
     }
 }
