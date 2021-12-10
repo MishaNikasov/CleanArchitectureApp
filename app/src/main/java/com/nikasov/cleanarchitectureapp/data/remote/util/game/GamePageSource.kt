@@ -1,15 +1,14 @@
 package com.nikasov.cleanarchitectureapp.data.remote.util.game
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.nikasov.cleanarchitectureapp.common.utils.DataState
 import com.nikasov.cleanarchitectureapp.data.remote.NetworkApi
 import com.nikasov.cleanarchitectureapp.domain.model.Game
-import com.nikasov.cleanarchitectureapp.domain.usecase.game.GetGamesListUseCase
-import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.HttpException
-import javax.inject.Inject
+
+private const val PAGE_SIZE = 10
 
 class GamePageSource (
     private val networkApi: NetworkApi
@@ -28,11 +27,22 @@ class GamePageSource (
         val response = networkApi.getGamesList(pageNumber, pageSize)
         return if (response.isSuccessful) {
             val gameList = response.body()?.results?.map { it.toGame() } ?: arrayListOf()
-            val nextKey = if (gameList.size < pageSize) null else pageNumber + 1
+            val nextKey = if (gameList.size < pageSize) null else calculateNextPage(pageSize, pageNumber)
             val prevKey = if (pageNumber == 1) null else pageNumber - 1
             LoadResult.Page(gameList, prevKey, nextKey)
         } else {
             LoadResult.Error(HttpException(response))
         }
     }
+
+    private fun calculateNextPage(pageSize: Int, currentPage: Int) = (pageSize / PAGE_SIZE) + currentPage
+
+    val pager = Pager(
+        config = PagingConfig(
+            pageSize = PAGE_SIZE,
+            maxSize = PAGE_SIZE + (PAGE_SIZE * 2),
+            enablePlaceholders = false
+        ),
+        pagingSourceFactory = { this }
+    )
 }

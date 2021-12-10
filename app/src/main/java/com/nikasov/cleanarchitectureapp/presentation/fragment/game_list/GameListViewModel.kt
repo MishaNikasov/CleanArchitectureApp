@@ -3,6 +3,7 @@ package com.nikasov.cleanarchitectureapp.presentation.fragment.game_list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.nikasov.cleanarchitectureapp.domain.usecase.game.GetGamesListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,7 +15,7 @@ class GameListViewModel @Inject constructor(
     getGamesListUseCase: GetGamesListUseCase
 ) : ViewModel() {
 
-    var gameList = getGamesListUseCase().stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
+    var gameList = getGamesListUseCase().cachedIn(viewModelScope)
 
 //    private val _state = MutableStateFlow<State<GameListState>>(State.Empty)
 //    val state = _state.asStateFlow()

@@ -15,21 +15,13 @@ import com.nikasov.cleanarchitectureapp.presentation.base.BaseRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-const val PAGE_SIZE = 20
 
 class GamesRepositoryImpl @Inject constructor(
     private val networkApi: NetworkApi
 ): BaseRepository(), GamesRepository {
 
     override fun getGamesList(): Flow<PagingData<Game>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = PAGE_SIZE,
-                maxSize = PAGE_SIZE + (PAGE_SIZE * 2),
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = { GamePageSource(networkApi) }
-        ).flow
+        return GamePageSource(networkApi).pager.flow
     }
 
     override suspend fun getGameDetail(id: String): DataState<GameDetail> {
@@ -47,10 +39,5 @@ class GamesRepositoryImpl @Inject constructor(
             DataState.error(ErrorModel.getLocalError(e.localizedMessage ?: "Something went wrong"))
         }
     }
-//    override suspend fun getGamesList(): DataState<GameList?> {
-//        return when (val response = obtainResponse(networkApi.getGamesList())) {
-//            is DataState.Success -> DataState.successes(response.data?.toGameList())
-//            is DataState.Error -> DataState.error(response.errorModel)
-//        }
-//    }
+
 }

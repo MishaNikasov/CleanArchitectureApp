@@ -20,3 +20,10 @@ open class BaseRepository {
         }
     }
 }
+
+//    override suspend fun getGamesList(): DataState<GameList?> {
+//        return when (val response = obtainResponse(networkApi.getGamesList())) {
+//            is DataState.Success -> DataState.successes(response.data?.toGameList())
+//            is DataState.Error -> DataState.error(response.errorModel)
+//        }
+//    }

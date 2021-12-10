@@ -4,28 +4,17 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 
-abstract class BaseAdapter<Model> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class BaseAdapter<Model>(
+    private val differ: AsyncListDiffer<Model>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    protected abstract var differ: AsyncListDiffer<Model>
+    private val list: List<Model> = differ.currentList
 
-    protected val callback = object : DiffUtil.ItemCallback<Model>() {
-        override fun areItemsTheSame(oldItem: Model, newItem: Model): Boolean {
-            return oldItem?.equals(newItem) ?: true
-        }
-
-        override fun areContentsTheSame(oldItem: Model, newItem: Model): Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
-        }
+    fun submitList(list: List<Model>?) {
+        if (list == null) return
+        differ.submitList(list)
     }
 
-    var list: List<Model>
-        get() = differ.currentList
-        set(value) {
-            differ.submitList(value)
-        }
-
-    override fun getItemCount(): Int {
-        return list.size
-    }
+    override fun getItemCount() = list.size
 
 }
