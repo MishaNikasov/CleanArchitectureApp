@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,13 +19,9 @@ class GameListViewModel @Inject constructor(
 ): ViewModel() {
 
     private val _state = MutableStateFlow<State<GameListState?>>(State.Empty)
-    val state: StateFlow<State<GameListState?>> = _state
+    val state = _state.asStateFlow()
 
-    init {
-        getGameList()
-    }
-
-    private fun getGameList() {
+    fun getGameList() {
         viewModelScope.launch(Dispatchers.IO) {
             _state.emit(State.loading())
             when (val gameList = gameUseCases.getGamesListUseCase()) {

@@ -34,6 +34,14 @@ open class BaseFragment<FragmentBinding : ViewBinding>(
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupViews()
+        setupViewModelCallbacks()
+        setData()
+        getData()
+    }
+
     override fun onDestroy() {
         binding = null
         super.onDestroy()
@@ -44,11 +52,17 @@ open class BaseFragment<FragmentBinding : ViewBinding>(
         hideKeyboard()
     }
 
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard()
+    }
+
+
     private fun handleLostConnection() {
         Timber.d("handleLostConnection ${this.binding}")
     }
 
-    fun handleBackPress(lifecycleOwner: LifecycleOwner, action: () -> Unit) {
+    protected fun handleBackPress(lifecycleOwner: LifecycleOwner, action: () -> Unit) {
         requireActivity()
             .onBackPressedDispatcher
             .addCallback(
@@ -58,22 +72,25 @@ open class BaseFragment<FragmentBinding : ViewBinding>(
             }
     }
 
-    override fun onPause() {
-        super.onPause()
-        hideKeyboard()
-    }
-
-    open fun errorState(errorModel: ErrorModel) {
+    protected open fun errorState(errorModel: ErrorModel) {
         hideKeyboard()
         loadingState(false)
         Timber.e("Error: ${errorModel.getErrorMessage()}")
         requireContext().showToast(errorModel.getErrorMessage())
     }
 
-    open fun loadingState(isLoading: Boolean) {}
+    protected open fun setData() {}
 
-    open fun refresh() {}
+    protected open fun getData() {}
 
-    open fun backPressAction() {}
+    protected open fun setupViews() {}
+
+    protected open fun setupViewModelCallbacks() {}
+
+    protected open fun loadingState(isLoading: Boolean) {}
+
+    protected open fun refresh() {}
+
+    protected open fun backPressAction() {}
 
 }
