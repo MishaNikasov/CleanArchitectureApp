@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewbinding.ViewBinding
-import com.nikasov.cleanarchitectureapp.common.ErrorModel
+import com.nikasov.cleanarchitectureapp.common.utils.ErrorModel
 import com.nikasov.cleanarchitectureapp.common.extensions.hideKeyboard
 import com.nikasov.cleanarchitectureapp.common.extensions.showToast
 import timber.log.Timber

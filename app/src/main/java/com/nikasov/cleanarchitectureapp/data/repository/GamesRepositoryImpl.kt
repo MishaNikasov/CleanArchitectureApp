@@ -1,8 +1,8 @@
 package com.nikasov.cleanarchitectureapp.data.repository
 
-import com.nikasov.cleanarchitectureapp.common.DataState
-import com.nikasov.cleanarchitectureapp.common.ErrorModel
-import com.nikasov.cleanarchitectureapp.common.getErrorModel
+import com.nikasov.cleanarchitectureapp.common.utils.DataState
+import com.nikasov.cleanarchitectureapp.common.utils.ErrorModel
+import com.nikasov.cleanarchitectureapp.common.utils.getErrorModel
 import com.nikasov.cleanarchitectureapp.data.remote.NetworkApi
 import com.nikasov.cleanarchitectureapp.domain.model.GameList
 import com.nikasov.cleanarchitectureapp.domain.repository.GamesRepository

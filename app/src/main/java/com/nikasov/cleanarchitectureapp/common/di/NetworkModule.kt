@@ -1,9 +1,9 @@
-package com.nikasov.cleanarchitectureapp.di
+package com.nikasov.cleanarchitectureapp.common.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.nikasov.cleanarchitectureapp.common.Constants
+import com.nikasov.cleanarchitectureapp.common.utils.Constants
 import com.nikasov.cleanarchitectureapp.data.remote.NetworkApi
 import com.nikasov.cleanarchitectureapp.data.remote.NetworkInterceptor
 import dagger.Module
@@ -14,7 +14,6 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Singleton
 
 @Module

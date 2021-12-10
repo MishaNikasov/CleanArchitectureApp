@@ -1,6 +1,6 @@
 package com.nikasov.cleanarchitectureapp.data.remote
 
-import com.nikasov.cleanarchitectureapp.common.Constants
+import com.nikasov.cleanarchitectureapp.common.utils.Constants
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject

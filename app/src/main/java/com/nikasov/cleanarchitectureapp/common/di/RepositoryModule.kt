@@ -1,4 +1,4 @@
-package com.nikasov.cleanarchitectureapp.di
+package com.nikasov.cleanarchitectureapp.common.di
 
 import com.nikasov.cleanarchitectureapp.data.remote.NetworkApi
 import com.nikasov.cleanarchitectureapp.data.repository.GamesRepositoryImpl

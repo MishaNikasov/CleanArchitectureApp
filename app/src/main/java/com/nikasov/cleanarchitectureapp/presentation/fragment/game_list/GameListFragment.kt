@@ -2,7 +2,7 @@ package com.nikasov.cleanarchitectureapp.presentation.fragment.game_list
 
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.nikasov.cleanarchitectureapp.common.State
+import com.nikasov.cleanarchitectureapp.common.utils.State
 import com.nikasov.cleanarchitectureapp.common.extensions.collectWhenStarted
 import com.nikasov.cleanarchitectureapp.databinding.FragmentGameListBinding
 import com.nikasov.cleanarchitectureapp.domain.model.Game

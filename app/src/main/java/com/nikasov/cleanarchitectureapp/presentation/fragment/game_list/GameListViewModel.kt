@@ -2,13 +2,12 @@ package com.nikasov.cleanarchitectureapp.presentation.fragment.game_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nikasov.cleanarchitectureapp.common.DataState
-import com.nikasov.cleanarchitectureapp.common.State
+import com.nikasov.cleanarchitectureapp.common.utils.DataState
+import com.nikasov.cleanarchitectureapp.common.utils.State
 import com.nikasov.cleanarchitectureapp.domain.usecase.game.GameUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,7 +25,8 @@ class GameListViewModel @Inject constructor(
             _state.emit(State.loading())
             when (val gameList = gameUseCases.getGamesListUseCase()) {
                 is DataState.Error -> _state.emit(State.error(gameList.errorModel))
-                is DataState.Success -> _state.emit(State.successes(
+                is DataState.Success -> _state.emit(
+                    State.successes(
                     GameListState(gameList = gameList.data?.gameList ?: arrayListOf()))
                 )
             }

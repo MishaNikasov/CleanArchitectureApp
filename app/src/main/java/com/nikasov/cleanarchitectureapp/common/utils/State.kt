@@ -1,4 +1,4 @@
-package com.nikasov.cleanarchitectureapp.common
+package com.nikasov.cleanarchitectureapp.common.utils
 
 sealed class State<out T> {
 

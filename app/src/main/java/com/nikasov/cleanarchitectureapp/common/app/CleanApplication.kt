@@ -1,4 +1,4 @@
-package com.nikasov.cleanarchitectureapp.common
+package com.nikasov.cleanarchitectureapp.common.app
 
 import androidx.multidex.MultiDexApplication
 import dagger.hilt.android.HiltAndroidApp
