@@ -10,4 +10,15 @@
         android:name="com.nikasov.cleanarchitectureapp.presentation.fragment.game_list.GameListFragment"
         android:label="GameListFragment"
         tools:layout="@layout/fragment_game_list" />
+
+    <fragment
+        android:id="@+id/gameDetailsFragment"
+        android:name="com.nikasov.cleanarchitectureapp.presentation.fragment.game_details.GameDetailsFragment"
+        android:label="GameDetailsFragment"
+        tools:layout="@layout/fragment_game_details" >
+        <argument
+            android:name="gameId"
+            app:argType="string" />
+    </fragment>
+
 </navigation>

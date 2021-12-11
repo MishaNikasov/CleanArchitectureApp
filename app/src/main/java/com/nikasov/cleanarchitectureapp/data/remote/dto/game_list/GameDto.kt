@@ -6,7 +6,7 @@ data class GameDto(
     val added: Int? = null,
     val background_image: String? = null,
     val esrb_rating: EsrbRatingDto? = null,
-    val id: Int? = null,
+    val id: String? = null,
     val metacritic: Float? = null,
     val name: String? = null,
     val platforms: List<PlatformDto>? = null,
@@ -24,7 +24,7 @@ data class GameDto(
     fun toGame() = Game(
         added = added ?: -1,
         backgroundImage = background_image ?: "",
-        id = id ?: -1,
+        id = id ?: "",
         metacritic = metacritic ?: -1f,
         name = name ?: "",
         platforms = platforms?.map { it.toPlatform() } ?: arrayListOf(),

@@ -3,10 +3,10 @@ package com.nikasov.cleanarchitectureapp.domain.repository
 import androidx.paging.PagingData
 import com.nikasov.cleanarchitectureapp.common.utils.DataState
 import com.nikasov.cleanarchitectureapp.domain.model.Game
-import com.nikasov.cleanarchitectureapp.domain.model.GameDetail
+import com.nikasov.cleanarchitectureapp.domain.model.GameDetails
 import kotlinx.coroutines.flow.Flow
 
 interface GamesRepository {
     fun getGamesList(): Flow<PagingData<Game>>
-    suspend fun getGameDetail(id: String): DataState<GameDetail>
+    suspend fun getGameDetail(id: String): DataState<GameDetails>
 }

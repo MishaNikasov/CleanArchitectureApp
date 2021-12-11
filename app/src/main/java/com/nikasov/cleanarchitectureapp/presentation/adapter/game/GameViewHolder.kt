@@ -7,7 +7,10 @@ import com.nikasov.cleanarchitectureapp.databinding.ItemGameBinding
 import com.nikasov.cleanarchitectureapp.domain.model.Game
 import com.nikasov.cleanarchitectureapp.presentation.base.IBinder
 
-class GameViewHolder(private val binding: ItemGameBinding): RecyclerView.ViewHolder(binding.root), IBinder<Game> {
+class GameViewHolder(
+    private val binding: ItemGameBinding,
+    private val onGameClick: (Game) -> Unit
+): RecyclerView.ViewHolder(binding.root), IBinder<Game> {
     override fun bindView(model: Game?, position: Int) {
         binding.apply {
             model ?: return@apply
@@ -17,6 +20,9 @@ class GameViewHolder(private val binding: ItemGameBinding): RecyclerView.ViewHol
             }
             title.text = model.name
             releaseDate.text = model.released
+            cardRoot.setOnClickListener {
+                onGameClick(model)
+            }
         }
     }
 }

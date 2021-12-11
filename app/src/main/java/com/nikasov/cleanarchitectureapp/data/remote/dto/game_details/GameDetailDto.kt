@@ -1,6 +1,6 @@
 package com.nikasov.cleanarchitectureapp.data.remote.dto.game_details
 
-import com.nikasov.cleanarchitectureapp.domain.model.GameDetail
+import com.nikasov.cleanarchitectureapp.domain.model.GameDetails
 
 data class GameDetailDto(
     val achievements_count: Int,
@@ -58,8 +58,8 @@ data class GameDetailDto(
     val website: String,
     val youtube_count: Int
 ) {
-    fun toGameDetail(): GameDetail {
-        return GameDetail(
+    fun toGameDetail(): GameDetails {
+        return GameDetails(
             name = name
         )
     }

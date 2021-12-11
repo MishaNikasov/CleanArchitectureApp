@@ -1,56 +1,71 @@
-//package com.nmible.patients.app.util.base
-//
-//import androidx.lifecycle.LiveData
-//import androidx.lifecycle.MutableLiveData
-//import androidx.lifecycle.ViewModel
-//import androidx.lifecycle.viewModelScope
-//import com.nmible.patients.app.data.entity.error.ErrorModel
-//import com.nmible.patients.app.util.DataState
-//import com.nmible.patients.app.util.UiState
-//import kotlinx.coroutines.CoroutineExceptionHandler
-//import kotlinx.coroutines.launch
-//import timber.log.Timber
-//import kotlin.coroutines.CoroutineContext
-//
-//open class BaseViewModel : ViewModel() {
-//    protected val _uiState =  MutableLiveData<UiState>()
-//    val uiState: LiveData<UiState> = _uiState
-//
-//    protected val exceptionHandler = CoroutineExceptionHandler { _: CoroutineContext, throwable: Throwable ->
-//        _uiState.value = UiState.Loading(false)
-//        _uiState.value = UiState.Error(ErrorModel.getLocalError(throwable.localizedMessage ?: "Error"))
-//        Timber.e(throwable.localizedMessage)
-//    }
-//
-//    fun <Model> handleRequest(
-//        request: (suspend () -> DataState<Model>),
-//        successAction: ((Model?) -> Unit)? = null,
-//        errorAction: ((ErrorModel) -> Unit)? = null,
-//        isLoading: Boolean = true,
-//    ) {
-//        viewModelScope.launch(exceptionHandler) {
-//            if (isLoading)
-//                _uiState.value = UiState.Loading(true)
-//            when (val state = request()) {
-//                is DataState.Success -> {
-//                    if (isLoading)
-//                        _uiState.value = UiState.Loading(false)
-//                    if (successAction != null) {
-//                        successAction(state.data)
-//                    } else {
-//                        _uiState.value = UiState.Successes(state.data)
-//                    }
-//                }
-//                is DataState.Error -> {
-//                    if (isLoading)
-//                        _uiState.value = UiState.Loading(false)
-//                    if (errorAction != null) {
-//                        errorAction(state.errorModel)
-//                    } else {
-//                        _uiState.value = UiState.Error(state.errorModel)
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
+package com.nikasov.cleanarchitectureapp.presentation.base
+
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.viewModelScope
+import com.nikasov.cleanarchitectureapp.common.utils.DataState
+import com.nikasov.cleanarchitectureapp.common.utils.ErrorModel
+import com.nikasov.cleanarchitectureapp.common.utils.Mapper
+import com.nikasov.cleanarchitectureapp.common.utils.State
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+
+open class BaseViewModel : ViewModel() {
+
+    fun <T> handleInto(
+        stateFlow: MutableStateFlow<State<T?>>,
+        block: suspend () -> DataState<T?>)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                when (val state = block()) {
+                    is DataState.Success -> stateFlow.value = State.successes(state.data)
+                    is DataState.Error -> stateFlow.value = State.error(state.errorModel)
+                }
+            } catch (e: Exception) {
+                stateFlow.value = State.error(ErrorModel.getLocalError(e.localizedMessage ?: ""))
+            }
+        }
+    }
+
+    fun <T, R> handleInto(
+        stateFlow: MutableStateFlow<State<R>>,
+        block: suspend () -> DataState<T?>,
+        mapper: Mapper<T?, R>
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                when (val state = block()) {
+                    is DataState.Success -> stateFlow.value = State.successes(mapper(state.data))
+                    is DataState.Error -> stateFlow.value = State.error(state.errorModel)
+                }
+            } catch (e: Exception) {
+                stateFlow.value = State.error(ErrorModel.getLocalError(e.localizedMessage ?: ""))
+            }
+        }
+    }
+
+    @InternalCoroutinesApi
+    fun <T> SavedStateHandle.getStateFlow(key: String, initValue: T): MutableStateFlow<T> {
+        val savedStateHandle = this
+        val mutableFlow = MutableStateFlow(savedStateHandle[key] ?: initValue)
+
+        viewModelScope.launch {
+            mutableFlow.collect {
+                savedStateHandle[key] = it
+            }
+        }
+
+        viewModelScope.launch {
+            savedStateHandle.getLiveData<T>(key).asFlow().collect {
+                mutableFlow.value = it
+            }
+        }
+
+        return mutableFlow
+    }
+}

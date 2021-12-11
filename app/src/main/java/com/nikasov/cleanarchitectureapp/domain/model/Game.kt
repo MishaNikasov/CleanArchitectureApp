@@ -3,7 +3,7 @@ package com.nikasov.cleanarchitectureapp.domain.model
 data class Game(
     val added: Int,
     val backgroundImage: String,
-    val id: Int,
+    val id: String,
     val metacritic: Float,
     val name: String,
     val platforms: List<Platform>,

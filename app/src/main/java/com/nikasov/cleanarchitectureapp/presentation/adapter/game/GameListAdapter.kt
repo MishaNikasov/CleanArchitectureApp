@@ -11,8 +11,10 @@ import javax.inject.Inject
 
 class GameListAdapter @Inject constructor(): PagingDataAdapter<Game, GameViewHolder>(gameListCallback) {
 
+    var onGameClick = { _: Game -> }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        GameViewHolder(ItemGameBinding.inflate(parent.inflater(), parent, false))
+        GameViewHolder(ItemGameBinding.inflate(parent.inflater(), parent, false), onGameClick)
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) =
         holder.bindView(getItem(position), position)
