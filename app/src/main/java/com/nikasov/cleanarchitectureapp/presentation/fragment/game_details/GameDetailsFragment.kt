@@ -2,7 +2,9 @@ package com.nikasov.cleanarchitectureapp.presentation.fragment.game_details
 
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import coil.load
 import com.nikasov.cleanarchitectureapp.common.extensions.collectWhenStarted
+import com.nikasov.cleanarchitectureapp.common.extensions.htmlText
 import com.nikasov.cleanarchitectureapp.common.utils.State
 import com.nikasov.cleanarchitectureapp.databinding.FragmentGameDetailsBinding
 import com.nikasov.cleanarchitectureapp.domain.model.GameDetails
@@ -39,7 +41,9 @@ class GameDetailsFragment: BaseFragment<FragmentGameDetailsBinding>(FragmentGame
     private fun setupGameDetails(gameDetails: GameDetails?) {
         gameDetails ?: return
         requireBinding().apply {
+            backgroundCover.load(gameDetails.coverImage)
             name.text = gameDetails.name
+            description.htmlText(gameDetails.description)
         }
     }
 

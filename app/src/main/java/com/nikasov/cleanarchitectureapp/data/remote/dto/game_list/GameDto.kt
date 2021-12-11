@@ -27,7 +27,6 @@ data class GameDto(
         id = id ?: "",
         metacritic = metacritic ?: -1f,
         name = name ?: "",
-        platforms = platforms?.map { it.toPlatform() } ?: arrayListOf(),
         playtime = playtime ?: -1f,
         rating = rating ?: -1f,
         released = released ?: "",

@@ -10,5 +10,6 @@
 
     <color name="link_water">#F8FAFD</color>
     <color name="link_black">#1B1B1B</color>
+    <color name="link_black_transparent">#DA1B1B1B</color>
 
 </resources>
