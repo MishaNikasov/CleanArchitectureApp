@@ -2,7 +2,6 @@ package com.nikasov.cleanarchitectureapp.presentation.adapter.game
 
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.nikasov.cleanarchitectureapp.common.extensions.inflater
 import com.nikasov.cleanarchitectureapp.databinding.ItemGameBinding

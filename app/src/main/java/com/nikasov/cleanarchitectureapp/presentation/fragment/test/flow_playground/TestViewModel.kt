@@ -1,4 +1,4 @@
-package com.nikasov.cleanarchitectureapp.presentation.fragment.test
+package com.nikasov.cleanarchitectureapp.presentation.fragment.test.flow_playground
 
 import androidx.lifecycle.viewModelScope
 import com.nikasov.cleanarchitectureapp.common.utils.DataState

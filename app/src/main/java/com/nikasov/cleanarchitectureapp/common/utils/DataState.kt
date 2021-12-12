@@ -14,4 +14,18 @@ sealed class DataState<out R> {
         is Success -> State.successes(this.data)
         is Error -> State.error(this.errorModel)
     }
+
+    fun getResult(): R? {
+        return if (this is Success) this.data else null
+    }
+
+    fun getResult(
+        successesBlock: (R?) -> Unit,
+        errorBlock: (ErrorModel) -> Unit
+    ) {
+        when (this) {
+            is Success -> successesBlock(data)
+            is Error -> errorBlock(errorModel)
+        }
+    }
 }

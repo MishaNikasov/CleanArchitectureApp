@@ -12,4 +12,24 @@ sealed class State<out T> {
         fun <T> error(errorModel: ErrorModel, data: T? = null) = Error(errorModel, data)
         fun <T> loading(data: T? = null) = Loading(data)
     }
+
+    fun getResult(): T? {
+        return when (this) {
+            is Successes -> this.data
+            else -> null
+        }
+    }
+
+    fun getResult(
+        loading: () -> Unit,
+        successes: (T?) -> Unit,
+        error: (ErrorModel) -> Unit
+    ) {
+        when (this) {
+            is Loading -> loading()
+            is Successes -> successes(data)
+            is Error -> error(errorModel)
+            else -> Unit
+        }
+    }
 }

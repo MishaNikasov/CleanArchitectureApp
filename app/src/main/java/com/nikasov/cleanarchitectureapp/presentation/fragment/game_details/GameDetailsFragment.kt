@@ -25,16 +25,17 @@ class GameDetailsFragment: BaseFragment<FragmentGameDetailsBinding>(FragmentGame
 
     override fun setupViewModelCallbacks() {
         gameDetailsViewModel.gameDetailState.collectWhenStarted(this) { state ->
-            when (state) {
-                is State.Loading -> loadingState(true)
-                is State.Error -> {
+            state.getResult(
+                loading = { loadingState(true) },
+                successes = {
+                    setupGameDetails(it?.gameDetails)
+                    loadingState(false)
+                },
+                error = {
+                    errorState(it)
                     loadingState(false)
                 }
-                is State.Successes -> {
-                    setupGameDetails(state.data.gameDetails)
-                    loadingState(false)
-                }
-            }
+            )
         }
     }
 

@@ -18,6 +18,11 @@ data class ErrorModel(
     fun getErrorMessage(): String = error
 }
 
+fun List<ErrorModel>.getCommonErrorModel(): ErrorModel {
+    return ErrorModel(
+        error = this.joinToString { it.getErrorMessage() }
+    )
+}
 
 fun createErrorModelResponseBody(msg: String): ResponseBody {
     return Gson().toJson(ErrorModel.getLocalError(msg)).toResponseBody()

@@ -1,6 +1,6 @@
 package com.nikasov.cleanarchitectureapp
 
-import com.nikasov.cleanarchitectureapp.presentation.fragment.test.TestViewModel
+import com.nikasov.cleanarchitectureapp.presentation.fragment.test.flow_playground.TestViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.test.runTest

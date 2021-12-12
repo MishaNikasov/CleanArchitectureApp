@@ -15,7 +15,9 @@ open class BaseRepository {
         return try {
             val mappedResponseBody = mapper(block.body())
             if (block.isSuccessful) {
-                DataState.successes(mappedResponseBody)
+                mappedResponseBody?.let {
+                    DataState.successes(mappedResponseBody)
+                } ?: DataState.error(ErrorModel.getLocalError("Empty body"))
             } else {
                 DataState.error(block.getErrorModel())
             }

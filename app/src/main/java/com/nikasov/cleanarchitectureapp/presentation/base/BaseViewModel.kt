@@ -22,10 +22,7 @@ open class BaseViewModel : ViewModel() {
     {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                when (val state = block()) {
-                    is DataState.Success -> stateFlow.value = State.successes(state.data)
-                    is DataState.Error -> stateFlow.value = State.error(state.errorModel)
-                }
+                stateFlow.value = block().toState()
             } catch (e: Exception) {
                 stateFlow.value = State.error(ErrorModel.getLocalError(e.localizedMessage ?: ""))
             }

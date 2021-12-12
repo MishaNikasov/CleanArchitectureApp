@@ -2,12 +2,11 @@ package com.nikasov.cleanarchitectureapp.presentation.fragment.game_details
 
 import androidx.lifecycle.SavedStateHandle
 import com.nikasov.cleanarchitectureapp.common.utils.State
-import com.nikasov.cleanarchitectureapp.domain.model.GameDetails
 import com.nikasov.cleanarchitectureapp.domain.usecase.game.GetGameDetailsUseCase
 import com.nikasov.cleanarchitectureapp.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
