@@ -10,7 +10,7 @@ import java.util.*
 const val PATTERN_SERVER = "yyyy-MM-dd"
 const val DD_MMMM = "dd MMMM"
 const val FULL_DATE = "EEE, d MMM, yyyy"
-const val DEFAULT_DATE = "dd MMM yyyy"
+const val DEFAULT_DATE = "MMM dd, yyyy"
 
 fun LocalDate?.byPattern(pattern: String): String {
     if (this == null) {

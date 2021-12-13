@@ -1,4 +1,4 @@
-package com.nikasov.cleanarchitectureapp.domain.usecase.game
+package com.nikasov.cleanarchitectureapp.domain.usecase.game_details
 
 import com.nikasov.cleanarchitectureapp.common.utils.DataState
 import com.nikasov.cleanarchitectureapp.domain.model.GameDetails

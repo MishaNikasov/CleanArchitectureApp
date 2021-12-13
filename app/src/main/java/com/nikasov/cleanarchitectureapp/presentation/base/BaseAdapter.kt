@@ -1,16 +1,24 @@
 package com.nikasov.cleanarchitectureapp.presentation.base
 
-import androidx.recyclerview.widget.RecyclerView
+import android.annotation.SuppressLint
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter<Model>(
-    private val differ: AsyncListDiffer<Model>
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+@SuppressLint("DiffUtilEquals")
+abstract class BaseAdapter<T, V: RecyclerView.ViewHolder> : RecyclerView.Adapter<V>() {
 
-    private val list: List<Model> = differ.currentList
+    abstract val differ: AsyncListDiffer<T>
 
-    fun submitList(list: List<Model>?) {
+    protected val callback = object : DiffUtil.ItemCallback<T>() {
+        override fun areItemsTheSame(oldItem: T, newItem: T) = oldItem == newItem
+        override fun areContentsTheSame(oldItem: T, newItem: T) = oldItem == newItem
+    }
+
+    protected val list: List<T>
+        get() = differ.currentList
+
+    fun submitList(list: List<T>?) {
         if (list == null) return
         differ.submitList(list)
     }

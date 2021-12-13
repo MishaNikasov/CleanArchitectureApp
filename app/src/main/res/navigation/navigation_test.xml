@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_test"
-    app:startDestination="@id/testUseCaseFragment">
+    app:startDestination="@id/sharedStateFragment">
 
     <fragment
         android:id="@+id/testFragment"
@@ -12,4 +12,8 @@
         android:id="@+id/testUseCaseFragment"
         android:name="com.nikasov.cleanarchitectureapp.presentation.fragment.test.use_case.TestUseCaseFragment"
         android:label="TestUseCaseFragment" />
+    <fragment
+        android:id="@+id/sharedStateFragment"
+        android:name="com.nikasov.cleanarchitectureapp.presentation.fragment.test.shared_state.SharedStateFragment"
+        android:label="SharedStateFragment" />
 </navigation>

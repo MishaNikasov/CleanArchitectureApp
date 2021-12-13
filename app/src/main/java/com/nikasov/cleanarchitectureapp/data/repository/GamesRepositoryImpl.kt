@@ -21,7 +21,7 @@ class GamesRepositoryImpl @Inject constructor(
 
     override suspend fun getGameDetail(id: String): DataState<GameDetails> {
         return obtainResponse(
-            block = networkApi.getGameDetails(id),
+            request = networkApi.getGameDetails(id),
             mapper = {
                 it?.toGameDetail()
             }

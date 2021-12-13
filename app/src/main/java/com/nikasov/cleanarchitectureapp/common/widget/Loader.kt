@@ -9,7 +9,6 @@ import com.airbnb.lottie.LottieDrawable
 import com.nikasov.cleanarchitectureapp.R
 import com.nikasov.cleanarchitectureapp.common.extensions.dpToPx
 import com.nikasov.cleanarchitectureapp.common.extensions.getResourceDrawable
-import com.nikasov.cleanarchitectureapp.common.extensions.pxToDx
 
 class Loader @JvmOverloads constructor(
     context: Context,

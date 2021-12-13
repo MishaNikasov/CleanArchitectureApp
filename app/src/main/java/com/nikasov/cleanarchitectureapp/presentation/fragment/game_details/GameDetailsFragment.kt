@@ -2,15 +2,21 @@ package com.nikasov.cleanarchitectureapp.presentation.fragment.game_details
 
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
+import com.nikasov.cleanarchitectureapp.common.extensions.DEFAULT_DATE
+import com.nikasov.cleanarchitectureapp.common.extensions.byPattern
 import com.nikasov.cleanarchitectureapp.common.extensions.collectWhenStarted
 import com.nikasov.cleanarchitectureapp.common.extensions.htmlText
-import com.nikasov.cleanarchitectureapp.common.utils.State
 import com.nikasov.cleanarchitectureapp.databinding.FragmentGameDetailsBinding
 import com.nikasov.cleanarchitectureapp.domain.model.GameDetails
+import com.nikasov.cleanarchitectureapp.domain.model.GameDetailsInfo
+import com.nikasov.cleanarchitectureapp.presentation.adapter.game_details.GameDetailsInfoAdapter
 import com.nikasov.cleanarchitectureapp.presentation.base.BaseFragment
+import com.nikasov.cleanarchitectureapp.presentation.util.addPlatforms
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
+import javax.inject.Inject
 
 @InternalCoroutinesApi
 @AndroidEntryPoint
@@ -19,16 +25,30 @@ class GameDetailsFragment: BaseFragment<FragmentGameDetailsBinding>(FragmentGame
     @InternalCoroutinesApi
     private val gameDetailsViewModel: GameDetailsViewModel by viewModels()
 
+    @Inject
+    lateinit var gameDetailsInfoAdapter: GameDetailsInfoAdapter
+
     override fun getData() {
         gameDetailsViewModel.getGameDetail()
+    }
+
+    override fun setupViews() {
+        requireBinding().apply {
+            infoRecycler.apply {
+                adapter = gameDetailsInfoAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+            }
+        }
     }
 
     override fun setupViewModelCallbacks() {
         gameDetailsViewModel.gameDetailState.collectWhenStarted(this) { state ->
             state.getResult(
                 loading = { loadingState(true) },
-                successes = {
-                    setupGameDetails(it?.gameDetails)
+                successes = { screenState ->
+                    screenState ?: return@getResult
+                    setupGameDetails(screenState.gameDetails)
+                    setupInfoList(screenState.infoList)
                     loadingState(false)
                 },
                 error = {
@@ -39,12 +59,18 @@ class GameDetailsFragment: BaseFragment<FragmentGameDetailsBinding>(FragmentGame
         }
     }
 
+    private fun setupInfoList(infoList: List<GameDetailsInfo>?) {
+        gameDetailsInfoAdapter.submitList(infoList)
+    }
+
     private fun setupGameDetails(gameDetails: GameDetails?) {
-        gameDetails ?: return
         requireBinding().apply {
+            gameDetails ?: return
             backgroundCover.load(gameDetails.coverImage)
             name.text = gameDetails.name
             description.htmlText(gameDetails.description)
+            releaseDate.text = gameDetails.releaseDate.byPattern(DEFAULT_DATE)
+            platformContainer.addPlatforms(requireContext(), gameDetails.platforms)
         }
     }
 

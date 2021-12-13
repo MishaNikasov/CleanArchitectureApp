@@ -1,7 +1,7 @@
 package com.nikasov.cleanarchitectureapp.data.remote.dto.game_details
 
+import com.nikasov.cleanarchitectureapp.common.extensions.getDateFromServerTime
 import com.nikasov.cleanarchitectureapp.domain.model.GameDetails
-import java.time.LocalDate
 
 data class GameDetailDto(
     val achievements_count: Int? = null,
@@ -15,11 +15,11 @@ data class GameDetailDto(
     val creators_count: Int? = null,
     val description: String? = null,
     val description_raw: String? = null,
-    val developers: List<Developer>? = null,
+    val developers: List<DeveloperDto>? = null,
     val dominant_color: String? = null,
     val esrb_rating: EsrbRating? = null,
     val game_series_count: Int? = null,
-    val genres: List<Genre>? = null,
+    val genres: List<GenreDto>? = null,
     val id: Int? = null,
     val metacritic: Int? = null,
     val metacritic_platforms: List<MetacriticPlatform>? = null,
@@ -64,10 +64,11 @@ data class GameDetailDto(
             name = name ?: "",
             description = description ?: "",
             metacriticScore = metacritic ?: -1,
-            //released
-            releaseDate = LocalDate.now(),
+            genres = genres?.map { it.toGenre() } ?: arrayListOf(),
+            releaseDate = released?.getDateFromServerTime(),
             coverImage = background_image ?: "",
             website = website ?: "",
+            developers = developers?.map { it.toDeveloper() } ?: arrayListOf(),
             playtime = playtime ?: -1,
             achievementsCount = achievements_count ?: -1,
             platforms = parent_platforms?.map { it.platform.toParentPlatform() } ?: arrayListOf()

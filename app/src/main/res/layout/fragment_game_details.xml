@@ -48,14 +48,51 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/releaseDate"
+        style="@style/TextStyle.Normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_margin"
+        android:background="@drawable/background_rounded_corner"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="10"
+        android:paddingHorizontal="@dimen/text_padding_horizontal"
+        android:paddingVertical="@dimen/text_padding_vertical"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@id/platformContainer"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/beginGuidline"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintTop_toTopOf="@id/topGuidline"
+        tools:text="May 19, 2020" />
+
+    <LinearLayout
+        android:id="@+id/platformContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_margin"
+        android:gravity="start|center"
+        android:orientation="horizontal"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/releaseDate"
+        app:layout_constraintEnd_toEndOf="@id/endGuidline"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/releaseDate"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintTop_toTopOf="@id/topGuidline" />
+
+    <TextView
         android:id="@+id/name"
         style="@style/TextStyle.Title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/endGuidline"
+        android:layout_marginTop="@dimen/space_margin"
         android:gravity="start"
+        app:layout_constraintEnd_toEndOf="@id/endGuidline"
         app:layout_constraintStart_toStartOf="@id/beginGuidline"
-        app:layout_constraintTop_toTopOf="@id/topGuidline"
+        app:layout_constraintTop_toBottomOf="@id/releaseDate"
         tools:text="Title" />
 
     <TextView
@@ -70,7 +107,19 @@
         app:layout_constraintEnd_toEndOf="@id/endGuidline"
         app:layout_constraintStart_toStartOf="@id/beginGuidline"
         app:layout_constraintTop_toBottomOf="@id/name"
-        tools:text="Title" />
+        tools:text="Description" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/infoRecycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/space_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/endGuidline"
+        app:layout_constraintStart_toStartOf="@+id/beginGuidline"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        tools:listitem="@layout/item_game_details_info" />
 
     <com.nikasov.cleanarchitectureapp.common.widget.Loader
         android:id="@+id/loader"

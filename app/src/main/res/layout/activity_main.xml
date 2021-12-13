@@ -12,5 +12,5 @@
         app:defaultNavHost="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:navGraph="@navigation/navigation_test" />
+        app:navGraph="@navigation/navigation_main" />
 </FrameLayout>

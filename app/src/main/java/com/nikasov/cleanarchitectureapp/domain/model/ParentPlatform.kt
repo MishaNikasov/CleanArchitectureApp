@@ -1,6 +1,7 @@
 package com.nikasov.cleanarchitectureapp.domain.model
 
 import androidx.annotation.DrawableRes
+import com.nikasov.cleanarchitectureapp.R
 
 data class ParentPlatform(
     val id: Int,
@@ -17,10 +18,10 @@ data class ParentPlatform(
 
     @DrawableRes
     val icon = when (slug) {
-        PC -> 1
-        XBOX -> 1
-        PLAYSTATION -> 1
-        MAC -> 1
-        else -> 2
+        PC -> R.drawable.ic_platform_windows
+        XBOX -> R.drawable.ic_platform_xbox
+        PLAYSTATION -> R.drawable.ic_platform_playstation
+        MAC -> R.drawable.ic_platform_mac
+        else -> R.drawable.ic_platform_windows
     }
 }

@@ -9,17 +9,17 @@ import retrofit2.Response
 open class BaseRepository {
 
     fun <DTO, Model> obtainResponse(
-        block: Response<DTO?>,
+        request: Response<DTO?>,
         mapper: Mapper<DTO?, Model?>
     ): DataState<Model> {
         return try {
-            val mappedResponseBody = mapper(block.body())
-            if (block.isSuccessful) {
+            val mappedResponseBody = mapper(request.body())
+            if (request.isSuccessful) {
                 mappedResponseBody?.let {
                     DataState.successes(mappedResponseBody)
                 } ?: DataState.error(ErrorModel.getLocalError("Empty body"))
             } else {
-                DataState.error(block.getErrorModel())
+                DataState.error(request.getErrorModel())
             }
         } catch (e: Exception) {
             DataState.error(ErrorModel.getLocalError(e.localizedMessage ?: "Something went wrong"))
