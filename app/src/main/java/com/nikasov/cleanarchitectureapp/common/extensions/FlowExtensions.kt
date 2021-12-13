@@ -5,6 +5,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -15,8 +16,10 @@ fun LifecycleOwner.addRepeatingJob(
     state: Lifecycle.State,
     controlContext: CoroutineContext = EmptyCoroutineContext,
     block: suspend CoroutineScope.() -> Unit
-) = lifecycleScope.launch(controlContext) {
-    lifecycle.repeatOnLifecycle(state, block)
+): Job {
+    return lifecycleScope.launch(controlContext) {
+        lifecycle.repeatOnLifecycle(state, block)
+    }
 }
 
 inline fun <T> Flow<T>.collectWhenStarted(

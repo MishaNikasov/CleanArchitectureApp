@@ -1,6 +1,5 @@
 package com.nikasov.cleanarchitectureapp.presentation.fragment.test.use_case
 
-import com.nikasov.cleanarchitectureapp.common.utils.DataState
 import com.nikasov.cleanarchitectureapp.common.utils.ErrorModel
 import com.nikasov.cleanarchitectureapp.common.utils.State
 import com.nikasov.cleanarchitectureapp.common.utils.getCommonErrorModel
@@ -30,7 +29,6 @@ class GetTestScreenUseCase @Inject constructor(
             var amount: Int? = null
 
             val errorList = arrayListOf<ErrorModel>()
-
 
             coroutineScope {
                 listOf(
@@ -66,11 +64,9 @@ class GetTestScreenUseCase @Inject constructor(
             } else {
                 emit(State.error(errorList.getCommonErrorModel()))
             }
-
         }
 
         Timber.d("Flow finished in ${TimeUnit.MILLISECONDS.toSeconds(totalTime)} seconds")
-
     }
 
 }

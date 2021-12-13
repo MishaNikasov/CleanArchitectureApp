@@ -1,4 +1,4 @@
-package com.nikasov.cleanarchitectureapp.common.di
+package com.nikasov.cleanarchitectureapp.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
