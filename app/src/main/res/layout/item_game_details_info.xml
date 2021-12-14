@@ -16,11 +16,9 @@
         android:textStyle="bold"
         tools:text="Header" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.google.android.material.chip.ChipGroup
         android:id="@+id/infoItemsRecycler"
-        android:layout_marginTop="@dimen/space_margin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_game_details_info_item" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
