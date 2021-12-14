@@ -6,16 +6,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nikasov.cleanarchitectureapp.common.extensions.dpToPx
 
 class HorizontalSpaceDecoration(
-    private val divider: Int = dpToPx(12f)
+    private val divider: Int = 12
 ): RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
 
+        val dividerInDp = dpToPx(divider.toFloat())
+
         with(outRect) {
-            if (parent.indexOfChild(view) != 0)
-                left = divider/2
-            right = divider/2
+            left = if (parent.indexOfChild(view) != 0)
+                dividerInDp/2
+            else
+                0
+            right = dividerInDp/2
         }
     }
 

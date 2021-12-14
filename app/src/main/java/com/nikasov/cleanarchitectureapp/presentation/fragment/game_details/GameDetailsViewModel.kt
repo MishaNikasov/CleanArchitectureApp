@@ -78,7 +78,6 @@ class GameDetailsViewModel @Inject constructor(
                     State.error(errorList.getCommonErrorModel())
                 )
             }
-
         }
     }
 

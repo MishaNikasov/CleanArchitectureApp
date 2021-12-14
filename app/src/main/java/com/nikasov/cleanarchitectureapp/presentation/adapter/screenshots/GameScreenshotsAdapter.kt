@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import com.nikasov.cleanarchitectureapp.common.extensions.inflater
 import com.nikasov.cleanarchitectureapp.databinding.ItemScreenshotBinding
 import com.nikasov.cleanarchitectureapp.domain.model.GameScreenshot
-import com.nikasov.cleanarchitectureapp.presentation.adapter.game.GameScreenshotViewHolder
 import com.nikasov.cleanarchitectureapp.presentation.base.BaseAdapter
 import javax.inject.Inject
 

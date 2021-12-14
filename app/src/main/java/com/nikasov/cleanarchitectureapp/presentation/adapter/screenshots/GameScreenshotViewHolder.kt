@@ -1,11 +1,8 @@
-package com.nikasov.cleanarchitectureapp.presentation.adapter.game
+package com.nikasov.cleanarchitectureapp.presentation.adapter.screenshots
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.size.Scale
-import com.nikasov.cleanarchitectureapp.databinding.ItemGameBinding
 import com.nikasov.cleanarchitectureapp.databinding.ItemScreenshotBinding
-import com.nikasov.cleanarchitectureapp.domain.model.Game
 import com.nikasov.cleanarchitectureapp.domain.model.GameScreenshot
 import com.nikasov.cleanarchitectureapp.presentation.base.IBinder
 
@@ -15,7 +12,11 @@ class GameScreenshotViewHolder(
 ): RecyclerView.ViewHolder(binding.root), IBinder<GameScreenshot> {
     override fun bindView(model: GameScreenshot?, position: Int) {
         binding.apply {
-            image.load(model?.image)
+            model ?: return
+            image.load(model.image)
+            cardRoot.setOnClickListener {
+                onScreenshotClick(model)
+            }
         }
     }
 }

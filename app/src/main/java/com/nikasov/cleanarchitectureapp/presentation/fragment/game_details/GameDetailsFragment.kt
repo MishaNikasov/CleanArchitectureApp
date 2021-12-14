@@ -51,7 +51,7 @@ class GameDetailsFragment: BaseFragment<FragmentGameDetailsBinding>(FragmentGame
             with(screenshotsRecycler) {
                 adapter = gameScreenshotsAdapter
                 layoutManager = LinearLayoutManager(requireContext()).also { it.orientation = HORIZONTAL }
-                addItemDecoration(HorizontalSpaceDecoration())
+                addItemDecoration(HorizontalSpaceDecoration(6))
             }
         }
     }
