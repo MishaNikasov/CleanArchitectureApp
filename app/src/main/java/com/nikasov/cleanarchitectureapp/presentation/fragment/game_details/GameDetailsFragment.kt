@@ -12,9 +12,10 @@ import com.nikasov.cleanarchitectureapp.common.extensions.htmlText
 import com.nikasov.cleanarchitectureapp.databinding.FragmentGameDetailsBinding
 import com.nikasov.cleanarchitectureapp.domain.model.GameDetails
 import com.nikasov.cleanarchitectureapp.domain.model.GameDetailsInfo
+import com.nikasov.cleanarchitectureapp.domain.model.GameScreenshot
 import com.nikasov.cleanarchitectureapp.presentation.adapter.decoration.HorizontalSpaceDecoration
 import com.nikasov.cleanarchitectureapp.presentation.adapter.decoration.VerticalSpaceDecoration
-import com.nikasov.cleanarchitectureapp.presentation.adapter.game.GameScreenshotsAdapter
+import com.nikasov.cleanarchitectureapp.presentation.adapter.screenshots.GameScreenshotsAdapter
 import com.nikasov.cleanarchitectureapp.presentation.adapter.game_details.GameDetailsInfoAdapter
 import com.nikasov.cleanarchitectureapp.presentation.base.BaseFragment
 import com.nikasov.cleanarchitectureapp.presentation.util.addPlatforms
@@ -63,6 +64,7 @@ class GameDetailsFragment: BaseFragment<FragmentGameDetailsBinding>(FragmentGame
                     screenState ?: return@getResult
                     setupGameDetails(screenState.gameDetails)
                     setupInfoList(screenState.infoList)
+                    setupScreenshots(screenState.screenshots)
                     loadingState(false)
                 },
                 error = {
@@ -71,10 +73,10 @@ class GameDetailsFragment: BaseFragment<FragmentGameDetailsBinding>(FragmentGame
                 }
             )
         }
-        gameDetailsViewModel.screenshotsList.collectWhenStarted(this) { list ->
-            Timber.d("Screenshots $list")
-            gameScreenshotsAdapter.submitData(list)
-        }
+    }
+
+    private fun setupScreenshots(screenshots: List<GameScreenshot>) {
+        gameScreenshotsAdapter.submitList(screenshots)
     }
 
     private fun setupInfoList(infoList: List<GameDetailsInfo>?) {

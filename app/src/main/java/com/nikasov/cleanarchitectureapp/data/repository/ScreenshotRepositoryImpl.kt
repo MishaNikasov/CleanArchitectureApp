@@ -9,24 +9,26 @@ import com.nikasov.cleanarchitectureapp.domain.model.Game
 import com.nikasov.cleanarchitectureapp.domain.model.GameDetails
 import com.nikasov.cleanarchitectureapp.domain.model.GameScreenshot
 import com.nikasov.cleanarchitectureapp.domain.repository.GamesRepository
+import com.nikasov.cleanarchitectureapp.domain.repository.ScreenshotRepository
 import com.nikasov.cleanarchitectureapp.presentation.base.BaseRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GamesRepositoryImpl @Inject constructor(
+class ScreenshotRepositoryImpl @Inject constructor(
     private val networkApi: NetworkApi
-) : BaseRepository(), GamesRepository {
+) : BaseRepository(), ScreenshotRepository {
 
-    override fun getGamesList(): Flow<PagingData<Game>> {
-        return GamePageSource(networkApi).pager.flow
+    override fun getPagingGameScreenshots(id: String): Flow<PagingData<GameScreenshot>> {
+        return GameScreenshotsPageSource(id, networkApi).pager.flow
     }
 
-    override suspend fun getGameDetail(id: String): DataState<GameDetails> {
+    override suspend fun getGameScreenshots(id: String): DataState<List<GameScreenshot>> {
         return obtainResponse(
-            request = networkApi.getGameDetails(id),
-            mapper = {
-                it?.toGameDetail()
+            request = networkApi.getGameScreenshots(id, 1, 10),
+            mapper = { gameScreenshotDto ->
+                gameScreenshotDto?.results?.map { it.toGameScreenshot() } ?: arrayListOf()
             }
         )
     }
+
 }

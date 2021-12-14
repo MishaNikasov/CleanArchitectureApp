@@ -1,15 +1,15 @@
-package com.nikasov.cleanarchitectureapp.presentation.adapter.game
+package com.nikasov.cleanarchitectureapp.presentation.adapter.screenshots
 
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.nikasov.cleanarchitectureapp.common.extensions.inflater
-import com.nikasov.cleanarchitectureapp.databinding.ItemGameBinding
 import com.nikasov.cleanarchitectureapp.databinding.ItemScreenshotBinding
 import com.nikasov.cleanarchitectureapp.domain.model.GameScreenshot
+import com.nikasov.cleanarchitectureapp.presentation.adapter.game.GameScreenshotViewHolder
 import javax.inject.Inject
 
-class GameScreenshotsAdapter @Inject constructor(): PagingDataAdapter<GameScreenshot, GameScreenshotViewHolder>(gameListCallback) {
+class GameScreenshotsPagingAdapter @Inject constructor(): PagingDataAdapter<GameScreenshot, GameScreenshotViewHolder>(gameListCallback) {
 
     var onScreenshotClick = { _: GameScreenshot -> }
 

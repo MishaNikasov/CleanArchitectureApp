@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.nikasov.cleanarchitectureapp.common.extensions.inflater
 import com.nikasov.cleanarchitectureapp.databinding.ItemGameBinding
 import com.nikasov.cleanarchitectureapp.domain.model.Game
+import com.nikasov.cleanarchitectureapp.presentation.adapter.screenshots.GameViewHolder
 import javax.inject.Inject
 
 class GameListAdapter @Inject constructor(): PagingDataAdapter<Game, GameViewHolder>(gameListCallback) {

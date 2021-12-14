@@ -2,7 +2,9 @@ package com.nikasov.cleanarchitectureapp.di
 
 import com.nikasov.cleanarchitectureapp.data.remote.NetworkApi
 import com.nikasov.cleanarchitectureapp.data.repository.GamesRepositoryImpl
+import com.nikasov.cleanarchitectureapp.data.repository.ScreenshotRepositoryImpl
 import com.nikasov.cleanarchitectureapp.domain.repository.GamesRepository
+import com.nikasov.cleanarchitectureapp.domain.repository.ScreenshotRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +21,14 @@ object RepositoryModule {
         networkApi: NetworkApi
     ): GamesRepository {
         return GamesRepositoryImpl(networkApi)
+    }
+
+    @Provides
+    @Singleton
+    fun provideScreenshotRepository(
+        networkApi: NetworkApi
+    ): ScreenshotRepository {
+        return ScreenshotRepositoryImpl(networkApi)
     }
 
 }

@@ -1,4 +1,4 @@
-package com.nikasov.cleanarchitectureapp.presentation.adapter.game
+package com.nikasov.cleanarchitectureapp.presentation.adapter.screenshots
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
