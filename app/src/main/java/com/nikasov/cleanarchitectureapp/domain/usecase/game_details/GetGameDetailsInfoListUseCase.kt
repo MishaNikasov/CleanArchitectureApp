@@ -12,19 +12,19 @@ class GetGameDetailsInfoListUseCase @Inject constructor() {
         val infoItems = arrayListOf<GameDetailsInfo>()
 
         gameDetails.apply {
-            genres?.let {
+            genres?.let { genres ->
                 infoItems.add(
-                    GameDetailsInfo.Genres(it.joinToString { item -> item.name })
+                    GameDetailsInfo.Genres(genres)
                 )
             }
-            developers?.let {
+            developers?.let { devs ->
                 infoItems.add(
-                    GameDetailsInfo.Developers(it.joinToString { item -> item.name })
+                    GameDetailsInfo.Developers(devs)
                 )
             }
-            tags?.let {
+            tags?.let { tags ->
                 infoItems.add(
-                    GameDetailsInfo.Tags(it.joinToString { item -> item.name })
+                    GameDetailsInfo.Tags(tags)
                 )
             }
         }

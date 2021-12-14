@@ -8,11 +8,11 @@ import coil.load
 import com.nikasov.cleanarchitectureapp.R
 import com.nikasov.cleanarchitectureapp.common.extensions.dpToPx
 import com.nikasov.cleanarchitectureapp.common.extensions.getResourceColor
-import com.nikasov.cleanarchitectureapp.domain.model.ParentPlatform
+import com.nikasov.cleanarchitectureapp.domain.model.GameDetailsInfoItem
 
 fun LinearLayout.addPlatforms(
     context: Context,
-    platforms: List<ParentPlatform>,
+    platforms: List<GameDetailsInfoItem.ParentPlatform>,
     @DrawableRes iconColor: Int = R.color.white,
     iconSize: Int = 25,
     padding: Int = 10

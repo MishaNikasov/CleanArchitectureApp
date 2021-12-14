@@ -1,12 +1,12 @@
 package com.nikasov.cleanarchitectureapp.domain.model
 
 sealed class GameDetailsInfo(
-    open val content: String
+    open val content: List<GameDetailsInfoItem>
 ) {
 
-    data class Developers(override val content: String): GameDetailsInfo(content)
-    data class Genres(override val content: String) : GameDetailsInfo(content)
-    data class Tags(override val content: String) : GameDetailsInfo(content)
+    data class Developers(override val content: List<GameDetailsInfoItem>): GameDetailsInfo(content)
+    data class Genres(override val content: List<GameDetailsInfoItem>) : GameDetailsInfo(content)
+    data class Tags(override val content: List<GameDetailsInfoItem>) : GameDetailsInfo(content)
 
     val header: String
     get() {

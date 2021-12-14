@@ -1,6 +1,7 @@
 package com.nikasov.cleanarchitectureapp.data.remote.dto.game_details
 
-import com.nikasov.cleanarchitectureapp.domain.model.Tag
+import com.nikasov.cleanarchitectureapp.domain.model.GameDetailsInfoItem
+
 
 data class TagDto(
     val games_count: Int,
@@ -11,7 +12,7 @@ data class TagDto(
     val slug: String
 ) {
     fun toTag() =
-        Tag(
+        GameDetailsInfoItem.Tag(
             id = id,
             name = name,
             slug = slug,

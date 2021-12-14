@@ -1,6 +1,6 @@
 package com.nikasov.cleanarchitectureapp.data.remote.dto.game_details
 
-import com.nikasov.cleanarchitectureapp.domain.model.Genre
+import com.nikasov.cleanarchitectureapp.domain.model.GameDetailsInfoItem
 
 data class GenreDto(
     val games_count: Int,
@@ -9,8 +9,8 @@ data class GenreDto(
     val name: String,
     val slug: String
 ) {
-    fun toGenre(): Genre =
-        Genre(
+    fun toGenre() =
+        GameDetailsInfoItem.Genre(
             id = id,
             name = name,
             slug = slug
