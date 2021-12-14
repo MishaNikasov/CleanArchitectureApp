@@ -6,12 +6,14 @@ sealed class GameDetailsInfo(
 
     data class Developers(override val content: String): GameDetailsInfo(content)
     data class Genres(override val content: String) : GameDetailsInfo(content)
+    data class Tags(override val content: String) : GameDetailsInfo(content)
 
     val header: String
     get() {
         return when (this) {
             is Developers -> "Developers"
             is Genres -> "Genres"
+            is Tags -> "Tags"
         }
     }
 }

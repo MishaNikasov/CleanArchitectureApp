@@ -9,7 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="link_water">#F8FAFD</color>
+    <color name="link_water_dark">#BDBDBD</color>
     <color name="link_black">#1B1B1B</color>
     <color name="link_black_transparent">#DA1B1B1B</color>
+    <color name="light_link_black_transparent">#25E3E3E3</color>
 
 </resources>

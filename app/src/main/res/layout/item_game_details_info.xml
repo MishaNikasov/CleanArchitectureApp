@@ -4,22 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:background="@color/black">
+    tools:background="@color/link_black">
 
     <TextView
         android:id="@+id/header"
-        style="@style/TextStyle.Title"
+        style="@style/TextStyle.Normal"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:textColor="@color/link_water_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Header" />
 
     <TextView
         android:id="@+id/content"
+        android:layout_marginTop="4dp"
         android:paddingVertical="@dimen/text_padding_vertical"
         android:paddingHorizontal="@dimen/text_padding_horizontal"
         android:textStyle="italic"
         android:background="@drawable/background_rounded_corner"
-        android:backgroundTint="#25E3E3E3"
+        android:backgroundTint="@color/light_link_black_transparent"
         style="@style/TextStyle.Normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

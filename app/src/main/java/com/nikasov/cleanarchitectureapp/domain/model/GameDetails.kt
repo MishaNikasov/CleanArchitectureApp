@@ -10,6 +10,7 @@ data class GameDetails(
     var coverImage: String,
     var developers: List<Developer>?,
     var website: String,
+    var tags: List<Tag>?,
     var genres: List<Genre>?,
     var playtime: Int,
     var achievementsCount: Int,

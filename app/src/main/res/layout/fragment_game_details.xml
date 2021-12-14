@@ -60,6 +60,7 @@
         android:paddingHorizontal="@dimen/text_padding_horizontal"
         android:paddingVertical="@dimen/text_padding_vertical"
         android:textColor="@color/black"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@id/platformContainer"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -90,6 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_margin"
         android:gravity="start"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="@id/endGuidline"
         app:layout_constraintStart_toStartOf="@id/beginGuidline"
         app:layout_constraintTop_toBottomOf="@id/releaseDate"
@@ -110,15 +112,30 @@
         tools:text="Description" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/screenshotsRecycler"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="@dimen/space_margin"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/default_padding"
+        android:overScrollMode="never"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        tools:listitem="@layout/item_screenshot" />
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/infoRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_margin"
         android:clipToPadding="false"
+        android:overScrollMode="never"
         android:paddingTop="@dimen/space_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/endGuidline"
         app:layout_constraintStart_toStartOf="@+id/beginGuidline"
-        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintTop_toBottomOf="@id/screenshotsRecycler"
         tools:listitem="@layout/item_game_details_info" />
 
     <com.nikasov.cleanarchitectureapp.common.widget.Loader

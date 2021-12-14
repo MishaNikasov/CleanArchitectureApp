@@ -18,6 +18,7 @@ fun LinearLayout.addPlatforms(
     padding: Int = 10
 ) {
     platforms.forEach { platform ->
+        removeAllViews()
         val iconView = ImageView(context)
         iconView.layoutParams = LinearLayout.LayoutParams(
             dpToPx(iconSize.toFloat()),

@@ -4,8 +4,10 @@ import androidx.paging.PagingData
 import com.nikasov.cleanarchitectureapp.common.utils.DataState
 import com.nikasov.cleanarchitectureapp.data.remote.NetworkApi
 import com.nikasov.cleanarchitectureapp.data.remote.util.game.GamePageSource
+import com.nikasov.cleanarchitectureapp.data.remote.util.game.GameScreenshotsPageSource
 import com.nikasov.cleanarchitectureapp.domain.model.Game
 import com.nikasov.cleanarchitectureapp.domain.model.GameDetails
+import com.nikasov.cleanarchitectureapp.domain.model.GameScreenshot
 import com.nikasov.cleanarchitectureapp.domain.repository.GamesRepository
 import com.nikasov.cleanarchitectureapp.presentation.base.BaseRepository
 import kotlinx.coroutines.flow.Flow
@@ -17,6 +19,10 @@ class GamesRepositoryImpl @Inject constructor(
 
     override fun getGamesList(): Flow<PagingData<Game>> {
         return GamePageSource(networkApi).pager.flow
+    }
+
+    override fun getGameScreenshots(id: String): Flow<PagingData<GameScreenshot>> {
+        return GameScreenshotsPageSource(id, networkApi).pager.flow
     }
 
     override suspend fun getGameDetail(id: String): DataState<GameDetails> {

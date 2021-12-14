@@ -12,6 +12,6 @@ class GameListViewModel @Inject constructor(
     getGamesListUseCase: GetGamesListUseCase
 ) : ViewModel() {
 
-    var gameList = getGamesListUseCase().cachedIn(viewModelScope)
+    val gameList = getGamesListUseCase().cachedIn(viewModelScope)
 
 }

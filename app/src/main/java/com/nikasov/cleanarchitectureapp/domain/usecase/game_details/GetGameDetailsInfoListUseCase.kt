@@ -22,6 +22,11 @@ class GetGameDetailsInfoListUseCase @Inject constructor() {
                     GameDetailsInfo.Developers(it.joinToString { item -> item.name })
                 )
             }
+            tags?.let {
+                infoItems.add(
+                    GameDetailsInfo.Tags(it.joinToString { item -> item.name })
+                )
+            }
         }
 
         return infoItems
