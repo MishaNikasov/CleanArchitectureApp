@@ -12,10 +12,16 @@ class GameScreenshotsAdapter @Inject constructor(): BaseAdapter<GameScreenshot, 
 
     var onScreenshotClick = { _: GameScreenshot, _: Int -> }
 
+    var cellSize: Int? = null
+
     override var differ = AsyncListDiffer(this, callback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        GameScreenshotViewHolder(ItemScreenshotBinding.inflate(parent.inflater(), parent, false), onScreenshotClick)
+        GameScreenshotViewHolder(
+            ItemScreenshotBinding.inflate(parent.inflater(), parent, false),
+            onScreenshotClick,
+            cellSize
+        )
 
     override fun onBindViewHolder(holder: GameScreenshotViewHolder, position: Int) =
         holder.bindView(list[position], position)

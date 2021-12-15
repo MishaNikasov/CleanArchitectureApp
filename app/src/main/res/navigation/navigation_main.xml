@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/gameListFragment">
+    app:startDestination="@id/favoriteScreenshotsFragment">
 
     <fragment
         android:id="@+id/gameListFragment"
@@ -15,7 +15,7 @@
         android:id="@+id/gameDetailsFragment"
         android:name="com.nikasov.cleanarchitectureapp.presentation.fragment.game_details.GameDetailsFragment"
         android:label="GameDetailsFragment"
-        tools:layout="@layout/fragment_game_details" >
+        tools:layout="@layout/fragment_game_details">
         <argument
             android:name="gameId"
             app:argType="string" />
@@ -23,9 +23,9 @@
 
     <fragment
         android:id="@+id/screenshotsFragment"
-        tools:layout="@layout/fragment_screenshots"
         android:name="com.nikasov.cleanarchitectureapp.presentation.fragment.screenshot.ScreenshotsFragment"
-        android:label="ScreenshotsFragment" >
+        android:label="ScreenshotsFragment"
+        tools:layout="@layout/fragment_screenshots">
         <argument
             android:name="selectedScreenshotPosition"
             app:argType="integer" />
@@ -33,5 +33,11 @@
             android:name="screenshots"
             app:argType="com.nikasov.cleanarchitectureapp.domain.model.GameScreenshot[]" />
     </fragment>
+
+    <fragment
+        android:id="@+id/favoriteScreenshotsFragment"
+        android:name="com.nikasov.cleanarchitectureapp.presentation.fragment.favorite_screenshots.FavoriteScreenshotsFragment"
+        android:label="FavoriteScreenshotsFragment"
+        tools:layout="@layout/fragment_favorite_screenshots" />
 
 </navigation>

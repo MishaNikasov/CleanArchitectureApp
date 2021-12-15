@@ -20,6 +20,7 @@ data class ScreenshotEntity(
     fun toGameScreenshot() =
         GameScreenshot(
             id = id,
-            image = image
+            image = image,
+            isFavorite = true
         )
 }
