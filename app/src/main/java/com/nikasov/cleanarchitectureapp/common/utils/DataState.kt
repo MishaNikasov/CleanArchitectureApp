@@ -21,11 +21,11 @@ sealed class DataState<out R> {
 
     fun getResult(
         successesBlock: (R?) -> Unit,
-        errorBlock: (ErrorModel) -> Unit
+        errorBlock: ((ErrorModel) -> Unit)? = null
     ) {
         when (this) {
             is Success -> successesBlock(data)
-            is Error -> errorBlock(errorModel)
+            is Error -> errorBlock?.invoke(errorModel)
         }
     }
 }

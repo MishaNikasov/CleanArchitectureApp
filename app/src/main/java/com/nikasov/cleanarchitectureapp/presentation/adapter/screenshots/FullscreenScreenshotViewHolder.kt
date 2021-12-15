@@ -6,7 +6,7 @@ import com.nikasov.cleanarchitectureapp.databinding.ItemFullscreenScreenshotBind
 import com.nikasov.cleanarchitectureapp.domain.model.GameScreenshot
 import com.nikasov.cleanarchitectureapp.presentation.base.IBinder
 
-class FullscreenScreenshotViewHolder (
+class FullscreenScreenshotViewHolder(
     private val binding: ItemFullscreenScreenshotBinding
 ): RecyclerView.ViewHolder(binding.root), IBinder<GameScreenshot> {
     override fun bindView(model: GameScreenshot?, position: Int) {

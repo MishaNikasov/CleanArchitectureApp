@@ -5,8 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class GameScreenshot(
-    val height: Int,
     val id: Int,
     val image: String,
-    val width: Int
+    var isFavorite: Boolean = false
 ): Parcelable

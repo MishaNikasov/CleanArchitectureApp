@@ -9,11 +9,10 @@ data class GameScreenshotItemDto(
     val is_deleted: Boolean? = null,
     val width: Int? = null
 ) {
-    fun toGameScreenshot() =
+    fun toGameScreenshot(isFavorite: Boolean = false) =
         GameScreenshot(
-            height = height ?: 0,
             id = id ?: 0,
             image = image ?: "",
-            width = width ?: 0
+            isFavorite = isFavorite
         )
 }

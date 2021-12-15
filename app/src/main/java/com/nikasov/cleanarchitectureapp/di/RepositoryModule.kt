@@ -1,5 +1,6 @@
 package com.nikasov.cleanarchitectureapp.di
 
+import com.nikasov.cleanarchitectureapp.data.local.dao.ScreenshotDao
 import com.nikasov.cleanarchitectureapp.data.remote.NetworkApi
 import com.nikasov.cleanarchitectureapp.data.repository.GamesRepositoryImpl
 import com.nikasov.cleanarchitectureapp.data.repository.ScreenshotRepositoryImpl
@@ -26,9 +27,10 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideScreenshotRepository(
-        networkApi: NetworkApi
+        networkApi: NetworkApi,
+        screenshotDao: ScreenshotDao
     ): ScreenshotRepository {
-        return ScreenshotRepositoryImpl(networkApi)
+        return ScreenshotRepositoryImpl(networkApi, screenshotDao)
     }
 
 }
