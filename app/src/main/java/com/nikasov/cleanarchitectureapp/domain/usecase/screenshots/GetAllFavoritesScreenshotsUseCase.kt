@@ -3,10 +3,10 @@ package com.nikasov.cleanarchitectureapp.domain.usecase.screenshots
 import com.nikasov.cleanarchitectureapp.domain.repository.ScreenshotRepository
 import javax.inject.Inject
 
-class GetPagingGameScreenshotsUseCase@Inject constructor(
+class GetAllFavoritesScreenshotsUseCase @Inject constructor(
     private val screenshotRepository: ScreenshotRepository
-) {
+){
 
-    operator fun invoke(id: String) = screenshotRepository.getPagingGameScreenshots(id)
+    operator fun invoke() = screenshotRepository.getAllSavedScreenshots()
 
 }
