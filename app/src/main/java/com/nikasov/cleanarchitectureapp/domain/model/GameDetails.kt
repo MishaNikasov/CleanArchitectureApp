@@ -14,5 +14,5 @@ data class GameDetails(
     var genres: List<GameDetailsInfoItem.Genre>?,
     var playtime: Int,
     var achievementsCount: Int,
-    var platforms: List<GameDetailsInfoItem.ParentPlatform>,
+    var platforms: List<ParentPlatform>,
 )

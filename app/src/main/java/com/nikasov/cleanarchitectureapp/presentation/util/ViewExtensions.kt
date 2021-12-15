@@ -8,17 +8,17 @@ import coil.load
 import com.nikasov.cleanarchitectureapp.R
 import com.nikasov.cleanarchitectureapp.common.extensions.dpToPx
 import com.nikasov.cleanarchitectureapp.common.extensions.getResourceColor
-import com.nikasov.cleanarchitectureapp.domain.model.GameDetailsInfoItem
+import com.nikasov.cleanarchitectureapp.domain.model.ParentPlatform
 
 fun LinearLayout.addPlatforms(
     context: Context,
-    platforms: List<GameDetailsInfoItem.ParentPlatform>,
+    platforms: List<ParentPlatform>,
     @DrawableRes iconColor: Int = R.color.white,
     iconSize: Int = 25,
     padding: Int = 10
 ) {
+    removeAllViews()
     platforms.forEach { platform ->
-        removeAllViews()
         val iconView = ImageView(context)
         iconView.layoutParams = LinearLayout.LayoutParams(
             dpToPx(iconSize.toFloat()),

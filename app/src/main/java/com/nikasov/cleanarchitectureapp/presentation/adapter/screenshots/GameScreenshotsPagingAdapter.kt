@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class GameScreenshotsPagingAdapter @Inject constructor(): PagingDataAdapter<GameScreenshot, GameScreenshotViewHolder>(gameListCallback) {
 
-    var onScreenshotClick = { _: GameScreenshot -> }
+    var onScreenshotClick = { _: GameScreenshot, _: Int -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         GameScreenshotViewHolder(ItemScreenshotBinding.inflate(parent.inflater(), parent, false), onScreenshotClick)

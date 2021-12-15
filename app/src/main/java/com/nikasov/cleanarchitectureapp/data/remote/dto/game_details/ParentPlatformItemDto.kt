@@ -1,6 +1,6 @@
 package com.nikasov.cleanarchitectureapp.data.remote.dto.game_details
 
-import com.nikasov.cleanarchitectureapp.domain.model.GameDetailsInfoItem
+import com.nikasov.cleanarchitectureapp.domain.model.ParentPlatform
 
 data class ParentPlatformItemDto(
     val id: Int,
@@ -8,7 +8,7 @@ data class ParentPlatformItemDto(
     val slug: String
 ) {
     fun toParentPlatform()=
-        GameDetailsInfoItem.ParentPlatform(
+        ParentPlatform(
             id = id,
             name = name,
             slug = slug

@@ -46,27 +46,6 @@ sealed class GameDetailsInfoItem(
         override val slug: String
     ): GameDetailsInfoItem(id, name, slug)
 
-    data class ParentPlatform(
-        override val id: Int,
-        override val name: String,
-        override val slug: String
-    ): GameDetailsInfoItem(id, name, slug) {
 
-        companion object {
-            private const val PC = "pc"
-            private const val XBOX = "xbox"
-            private const val PLAYSTATION = "playstation"
-            private const val MAC = "mac"
-        }
-
-        @DrawableRes
-        val icon = when (slug) {
-            PC -> R.drawable.ic_platform_windows
-            XBOX -> R.drawable.ic_platform_xbox
-            PLAYSTATION -> R.drawable.ic_platform_playstation
-            MAC -> R.drawable.ic_platform_mac
-            else -> R.drawable.ic_platform_windows
-        }
-    }
 
 }

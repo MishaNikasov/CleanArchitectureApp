@@ -2,6 +2,7 @@ package com.nikasov.cleanarchitectureapp.presentation.fragment.game_details
 
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import coil.load
@@ -18,10 +19,10 @@ import com.nikasov.cleanarchitectureapp.presentation.adapter.decoration.Vertical
 import com.nikasov.cleanarchitectureapp.presentation.adapter.screenshots.GameScreenshotsAdapter
 import com.nikasov.cleanarchitectureapp.presentation.adapter.game_details.GameDetailsInfoAdapter
 import com.nikasov.cleanarchitectureapp.presentation.base.BaseFragment
+import com.nikasov.cleanarchitectureapp.presentation.routers.MainRouter
 import com.nikasov.cleanarchitectureapp.presentation.util.addPlatforms
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
-import timber.log.Timber
 import javax.inject.Inject
 
 @InternalCoroutinesApi
@@ -36,6 +37,8 @@ class GameDetailsFragment: BaseFragment<FragmentGameDetailsBinding>(FragmentGame
 
     @Inject
     lateinit var gameScreenshotsAdapter: GameScreenshotsAdapter
+
+    private val router by lazy { MainRouter(findNavController()) }
 
     override fun getData() {
         gameDetailsViewModel.getGameDetail()
@@ -77,6 +80,9 @@ class GameDetailsFragment: BaseFragment<FragmentGameDetailsBinding>(FragmentGame
 
     private fun setupScreenshots(screenshots: List<GameScreenshot>) {
         gameScreenshotsAdapter.submitList(screenshots)
+        gameScreenshotsAdapter.onScreenshotClick = { _, position ->
+            router.openScreenshotsFragment(position, screenshots)
+        }
     }
 
     private fun setupInfoList(infoList: List<GameDetailsInfo>?) {
