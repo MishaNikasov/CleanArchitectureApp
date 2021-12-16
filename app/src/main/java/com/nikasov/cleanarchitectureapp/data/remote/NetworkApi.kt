@@ -13,17 +13,23 @@ interface NetworkApi {
     @GET(NetworkUrl.GAMES)
     suspend fun getGamesList(
         @Query("page") page: Int,
-        @Query("page_size") pageSize: Int
+        @Query("page_size") pageSize: Int,
+        @Query("search") search: String?,
+        @Query("developers") developers: String?,
+        @Query("genres") genres: String?,
+        @Query("tags") tags: String?,
+        @Query("dates") dates: String?,
+        @Query("ordering") ordering: String?
     ): Response<GameListDto?>
 
     @GET(NetworkUrl.GAME_DETAIL)
     suspend fun getGameDetails(
-        @Path ("id") id: String
+        @Path("id") id: String
     ): Response<GameDetailDto?>
 
     @GET(NetworkUrl.GAME_SCREENSHOTS)
     suspend fun getGameScreenshots(
-        @Path ("game_pk") gamePk: String,
+        @Path("game_pk") gamePk: String,
         @Query("page") page: Int,
         @Query("page_size") pageSize: Int
     ): Response<GameScreenshotsDto?>

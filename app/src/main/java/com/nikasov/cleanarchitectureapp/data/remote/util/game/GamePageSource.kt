@@ -6,13 +6,15 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.nikasov.cleanarchitectureapp.data.remote.NetworkApi
 import com.nikasov.cleanarchitectureapp.domain.model.Game
+import com.nikasov.cleanarchitectureapp.domain.model.GameListQuery
 import retrofit2.HttpException
 
 private const val PAGE_SIZE = 10
 
-class GamePageSource (
-    private val networkApi: NetworkApi
-): PagingSource<Int, Game>() {
+class GamePageSource(
+    private val networkApi: NetworkApi,
+    private val gameListQuery: GameListQuery
+) : PagingSource<Int, Game>() {
 
     override fun getRefreshKey(state: PagingState<Int, Game>): Int? {
         val anchorPosition = state.anchorPosition ?: return null
@@ -24,7 +26,17 @@ class GamePageSource (
         val pageNumber = params.key ?: 1
         val pageSize = params.loadSize
 
-        val response = networkApi.getGamesList(pageNumber, pageSize)
+        val response = networkApi.getGamesList(
+            page = pageNumber,
+            pageSize = pageSize,
+            search = gameListQuery.search,
+            developers = gameListQuery.developers,
+            genres = gameListQuery.genres,
+            tags = gameListQuery.tags,
+            dates = gameListQuery.dates,
+            ordering = gameListQuery.ordering
+        )
+
         return if (response.isSuccessful) {
             val gameList = response.body()?.results?.map { it.toGame() } ?: arrayListOf()
             val nextKey = if (gameList.size < pageSize) null else calculateNextPage(pageSize, pageNumber)
