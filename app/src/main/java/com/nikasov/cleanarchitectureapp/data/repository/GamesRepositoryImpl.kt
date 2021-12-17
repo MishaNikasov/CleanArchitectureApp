@@ -6,7 +6,7 @@ import com.nikasov.cleanarchitectureapp.data.remote.NetworkApi
 import com.nikasov.cleanarchitectureapp.data.remote.util.game.GamePageSource
 import com.nikasov.cleanarchitectureapp.domain.model.Game
 import com.nikasov.cleanarchitectureapp.domain.model.GameDetails
-import com.nikasov.cleanarchitectureapp.domain.model.GameListQuery
+import com.nikasov.cleanarchitectureapp.domain.model.search.FilterQuery
 import com.nikasov.cleanarchitectureapp.domain.repository.GamesRepository
 import com.nikasov.cleanarchitectureapp.presentation.base.BaseRepository
 import kotlinx.coroutines.flow.Flow
@@ -16,10 +16,12 @@ class GamesRepositoryImpl @Inject constructor(
     private val networkApi: NetworkApi
 ) : BaseRepository(), GamesRepository {
 
-    override fun getGamesList(gameListQuery: GameListQuery): Flow<PagingData<Game>> {
+    override fun getGamesList(
+        filterQuery: List<FilterQuery>
+    ): Flow<PagingData<Game>> {
         return GamePageSource(
             networkApi,
-            gameListQuery
+            filterQuery
         ).pager.flow
     }
 

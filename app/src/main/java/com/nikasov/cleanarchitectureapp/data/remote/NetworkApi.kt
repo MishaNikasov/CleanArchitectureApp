@@ -18,7 +18,6 @@ interface NetworkApi {
         @Query("developers") developers: String?,
         @Query("genres") genres: String?,
         @Query("tags") tags: String?,
-        @Query("dates") dates: String?,
         @Query("ordering") ordering: String?
     ): Response<GameListDto?>
 

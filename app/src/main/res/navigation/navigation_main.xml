@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/gameListFragment">
+    app:startDestination="@id/hubScreenFragment">
 
     <fragment
-        android:id="@+id/gameListFragment"
-        android:name="com.nikasov.cleanarchitectureapp.presentation.fragment.game_list.GameListFragment"
+        android:id="@+id/hubScreenFragment"
+        android:name="com.nikasov.cleanarchitectureapp.presentation.fragment.hub_screen.HubScreenFragment"
         android:label="GameListFragment"
-        tools:layout="@layout/fragment_game_list" />
+        tools:layout="@layout/fragment_hub_screen" />
 
     <fragment
         android:id="@+id/gameDetailsFragment"
@@ -39,5 +39,16 @@
         android:name="com.nikasov.cleanarchitectureapp.presentation.fragment.favorite_screenshots.FavoriteScreenshotsFragment"
         android:label="FavoriteScreenshotsFragment"
         tools:layout="@layout/fragment_favorite_screenshots" />
+
+    <fragment
+        android:id="@+id/gameListFragment"
+        android:name="com.nikasov.cleanarchitectureapp.presentation.fragment.game_list.GameListFragment"
+        android:label="GameListFragment"
+        tools:layout="@layout/fragment_game_list">
+        <argument
+            android:name="filterQuery"
+            app:argType="com.nikasov.cleanarchitectureapp.domain.model.search.FilterQuery[]"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

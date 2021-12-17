@@ -16,8 +16,8 @@ import com.nikasov.cleanarchitectureapp.domain.model.GameDetailsInfo
 import com.nikasov.cleanarchitectureapp.domain.model.GameScreenshot
 import com.nikasov.cleanarchitectureapp.presentation.adapter.decoration.HorizontalSpaceDecoration
 import com.nikasov.cleanarchitectureapp.presentation.adapter.decoration.VerticalSpaceDecoration
-import com.nikasov.cleanarchitectureapp.presentation.adapter.screenshots.GameScreenshotsAdapter
 import com.nikasov.cleanarchitectureapp.presentation.adapter.game_details.GameDetailsInfoAdapter
+import com.nikasov.cleanarchitectureapp.presentation.adapter.screenshots.GameScreenshotsAdapter
 import com.nikasov.cleanarchitectureapp.presentation.base.BaseFragment
 import com.nikasov.cleanarchitectureapp.presentation.routers.MainRouter
 import com.nikasov.cleanarchitectureapp.presentation.util.addPlatforms
@@ -50,6 +50,10 @@ class GameDetailsFragment: BaseFragment<FragmentGameDetailsBinding>(FragmentGame
                 adapter = gameDetailsInfoAdapter
                 layoutManager = LinearLayoutManager(requireContext())
                 addItemDecoration(VerticalSpaceDecoration())
+
+                gameDetailsInfoAdapter.onItemClick = { query ->
+                    router.openGameListFragment(listOf(query))
+                }
             }
             with(screenshotsRecycler) {
                 adapter = gameScreenshotsAdapter

@@ -6,14 +6,15 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.nikasov.cleanarchitectureapp.data.remote.NetworkApi
 import com.nikasov.cleanarchitectureapp.domain.model.Game
-import com.nikasov.cleanarchitectureapp.domain.model.GameListQuery
+import com.nikasov.cleanarchitectureapp.domain.model.search.FilterQuery
+import com.nikasov.cleanarchitectureapp.domain.model.search.returnQuery
 import retrofit2.HttpException
 
 private const val PAGE_SIZE = 10
 
 class GamePageSource(
     private val networkApi: NetworkApi,
-    private val gameListQuery: GameListQuery
+    private val gameListQuery: List<FilterQuery>
 ) : PagingSource<Int, Game>() {
 
     override fun getRefreshKey(state: PagingState<Int, Game>): Int? {
@@ -29,12 +30,11 @@ class GamePageSource(
         val response = networkApi.getGamesList(
             page = pageNumber,
             pageSize = pageSize,
-            search = gameListQuery.search,
-            developers = gameListQuery.developers,
-            genres = gameListQuery.genres,
-            tags = gameListQuery.tags,
-            dates = gameListQuery.dates,
-            ordering = gameListQuery.ordering
+            search = returnQuery<FilterQuery.Search>(gameListQuery),
+            developers = returnQuery<FilterQuery.Developers>(gameListQuery),
+            genres = returnQuery<FilterQuery.Genres>(gameListQuery),
+            tags = returnQuery<FilterQuery.Tags>(gameListQuery),
+            ordering = returnQuery<FilterQuery.OrderingType>(gameListQuery)
         )
 
         return if (response.isSuccessful) {
