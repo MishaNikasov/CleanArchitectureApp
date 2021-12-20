@@ -30,11 +30,11 @@ class GamePageSource(
         val response = networkApi.getGamesList(
             page = pageNumber,
             pageSize = pageSize,
-            search = returnQuery<FilterQuery.Search>(gameListQuery),
+            search = gameListQuery.firstOrNull { it is FilterQuery.Search }?.query,
             developers = returnQuery<FilterQuery.Developers>(gameListQuery),
             genres = returnQuery<FilterQuery.Genres>(gameListQuery),
             tags = returnQuery<FilterQuery.Tags>(gameListQuery),
-            ordering = returnQuery<FilterQuery.OrderingType>(gameListQuery)
+            ordering = gameListQuery.firstOrNull { it is FilterQuery.OrderingType }?.query
         )
 
         return if (response.isSuccessful) {

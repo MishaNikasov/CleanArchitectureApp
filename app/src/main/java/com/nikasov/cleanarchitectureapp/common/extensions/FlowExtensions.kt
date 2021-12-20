@@ -1,12 +1,11 @@
 package com.nikasov.cleanarchitectureapp.common.extensions
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
@@ -29,6 +28,18 @@ inline fun <T> Flow<T>.collectWhenStarted(
     lifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
         collect(action)
     }
+}
+
+fun <T> MutableStateFlow<MutableList<T>>.addItem(item: T) {
+    val list = this.value
+    list.add(item)
+    this.value = list
+}
+
+fun <T> MutableStateFlow<MutableList<T>>.removeItem(index: Int) {
+    val list = this.value
+    list.removeAt(index)
+    this.value = list
 }
 
 /**
