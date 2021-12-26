@@ -1,6 +1,6 @@
 package com.nikasov.cleanarchitectureapp.common.utils
 
-sealed class DataState<out R> {
+sealed class DataState<out T> {
 
     data class Success<out T>(val data: T?) : DataState<T>()
     data class Error(val errorModel: ErrorModel) : DataState<Nothing>()
@@ -15,12 +15,14 @@ sealed class DataState<out R> {
         is Error -> State.error(this.errorModel)
     }
 
-    fun getResult(): R? {
-        return if (this is Success) this.data else null
+    suspend fun getResult(block: suspend (T?) -> Unit) {
+        if (this  is Success) {
+            block(data)
+        }
     }
 
     fun getResult(
-        successesBlock: (R?) -> Unit,
+        successesBlock: (T?) -> Unit,
         errorBlock: ((ErrorModel) -> Unit)? = null
     ) {
         when (this) {

@@ -9,10 +9,14 @@ import com.nikasov.cleanarchitectureapp.common.extensions.removeItem
 import com.nikasov.cleanarchitectureapp.domain.model.search.FilterQuery
 import com.nikasov.cleanarchitectureapp.domain.usecase.game.GetGamesListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+const val SEARCH_DELAY = 700L
 
 @HiltViewModel
 class GameListViewModel @Inject constructor(
@@ -24,10 +28,10 @@ class GameListViewModel @Inject constructor(
 
     private val _filterQueryList = MutableStateFlow(mutableListOf<FilterQuery>())
 
-    @FlowPreview
-    val gameList = _filterQueryList.flatMapConcat { filterList ->
-        getGamesListUseCase(filterList).cachedIn(viewModelScope)
-    }
+    val gameList = _filterQueryList.flatMapLatest { filterList ->
+        delay(SEARCH_DELAY)
+        getGamesListUseCase(filterList)
+    }.cachedIn(viewModelScope)
 
     init {
         if (filterQueryFromBundle != null) {
@@ -35,16 +39,22 @@ class GameListViewModel @Inject constructor(
         }
     }
 
+    fun search(text: String) {
+        _filterQueryList.value.removeIf { it is FilterQuery.Search }
+        addFilter(FilterQuery.Search(text))
+    }
+
     fun addFilter(filterQuery: FilterQuery) {
-        if (filterQuery is FilterQuery.Search) {
-            _filterQueryList.value.removeIf { it is FilterQuery.Search }
+        viewModelScope.launch {
+            _filterQueryList.addItem(filterQuery)
         }
-        _filterQueryList.addItem(filterQuery)
     }
 
     fun removeFilter(filterQuery: FilterQuery) {
-        val index = _filterQueryList.value.indexOfFirst { it.query == filterQuery.query }
-        _filterQueryList.removeItem(index)
+        viewModelScope.launch {
+            val index = _filterQueryList.value.indexOfFirst { it.query == filterQuery.query }
+            _filterQueryList.removeItem(index)
+        }
     }
 
 }

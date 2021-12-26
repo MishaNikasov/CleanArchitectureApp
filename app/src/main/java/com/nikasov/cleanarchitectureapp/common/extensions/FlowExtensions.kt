@@ -3,10 +3,7 @@ package com.nikasov.cleanarchitectureapp.common.extensions
 import androidx.lifecycle.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -30,16 +27,18 @@ inline fun <T> Flow<T>.collectWhenStarted(
     }
 }
 
-fun <T> MutableStateFlow<MutableList<T>>.addItem(item: T) {
-    val list = this.value
+suspend fun <T> MutableStateFlow<MutableList<T>>.addItem(item: T) {
+    val list = arrayListOf<T>()
+    list.addAll(this.value)
     list.add(item)
-    this.value = list
+    emit(list)
 }
 
-fun <T> MutableStateFlow<MutableList<T>>.removeItem(index: Int) {
-    val list = this.value
+suspend fun <T> MutableStateFlow<MutableList<T>>.removeItem(index: Int) {
+    val list = arrayListOf<T>()
+    list.addAll(this.value)
     list.removeAt(index)
-    this.value = list
+    emit(list)
 }
 
 /**

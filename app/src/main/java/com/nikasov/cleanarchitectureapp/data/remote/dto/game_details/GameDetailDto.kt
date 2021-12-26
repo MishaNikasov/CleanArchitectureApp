@@ -1,6 +1,7 @@
 package com.nikasov.cleanarchitectureapp.data.remote.dto.game_details
 
 import com.nikasov.cleanarchitectureapp.common.extensions.getDateFromServerTime
+import com.nikasov.cleanarchitectureapp.data.remote.dto.filter.FilterDto
 import com.nikasov.cleanarchitectureapp.domain.model.GameDetails
 
 data class GameDetailDto(
@@ -15,11 +16,11 @@ data class GameDetailDto(
     val creators_count: Int? = null,
     val description: String? = null,
     val description_raw: String? = null,
-    val developers: List<DeveloperDto>? = null,
+    val developers: List<FilterDto>? = null,
     val dominant_color: String? = null,
     val esrb_rating: EsrbRating? = null,
     val game_series_count: Int? = null,
-    val genres: List<GenreDto>? = null,
+    val genres: List<FilterDto>? = null,
     val id: Int? = null,
     val metacritic: Int? = null,
     val metacritic_platforms: List<MetacriticPlatform>? = null,
@@ -51,7 +52,7 @@ data class GameDetailDto(
     val slug: String? = null,
     val stores: List<Store>? = null,
     val suggestions_count: Int? = null,
-    val tags: List<TagDto>? = null,
+    val tags: List<FilterDto>? = null,
     val tba: Boolean? = null,
     val twitch_count: Int? = null,
     val updated: String? = null,

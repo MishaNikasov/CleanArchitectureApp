@@ -1,5 +1,6 @@
 package com.nikasov.cleanarchitectureapp.data.remote
 
+import com.nikasov.cleanarchitectureapp.data.remote.dto.filter.FilterResponseDto
 import com.nikasov.cleanarchitectureapp.data.remote.dto.game_details.GameDetailDto
 import com.nikasov.cleanarchitectureapp.data.remote.dto.game_list.GameListDto
 import com.nikasov.cleanarchitectureapp.data.remote.dto.game_screenshots.GameScreenshotsDto
@@ -32,4 +33,13 @@ interface NetworkApi {
         @Query("page") page: Int,
         @Query("page_size") pageSize: Int
     ): Response<GameScreenshotsDto?>
+
+    @GET(NetworkUrl.DEVELOPERS)
+    suspend fun getDevelopers(): Response<FilterResponseDto?>
+
+    @GET(NetworkUrl.GENRES)
+    suspend fun getGenres(): Response<FilterResponseDto?>
+
+    @GET(NetworkUrl.TAGS)
+    suspend fun getTags(): Response<FilterResponseDto?>
 }

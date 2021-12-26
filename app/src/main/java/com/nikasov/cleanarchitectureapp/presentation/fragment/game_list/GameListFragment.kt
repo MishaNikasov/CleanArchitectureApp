@@ -3,15 +3,19 @@ package com.nikasov.cleanarchitectureapp.presentation.fragment.game_list
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikasov.cleanarchitectureapp.common.extensions.collectWhenStarted
+import com.nikasov.cleanarchitectureapp.common.extensions.showToast
 import com.nikasov.cleanarchitectureapp.databinding.FragmentGameListBinding
 import com.nikasov.cleanarchitectureapp.domain.model.search.FilterQuery
 import com.nikasov.cleanarchitectureapp.presentation.adapter.game.GameListAdapter
 import com.nikasov.cleanarchitectureapp.presentation.base.BaseFragment
 import com.nikasov.cleanarchitectureapp.presentation.routers.MainRouter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -32,9 +36,8 @@ class GameListFragment: BaseFragment<FragmentGameListBinding>(FragmentGameListBi
             layoutManager = LinearLayoutManager(requireContext())
         }
         with(requireBinding()) {
-            // Search
             searchEditField.doAfterTextChanged {
-                gameListViewModel.addFilter(FilterQuery.Search(it.toString()))
+                gameListViewModel.search(it.toString())
             }
         }
     }

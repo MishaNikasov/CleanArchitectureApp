@@ -16,6 +16,7 @@ import com.nikasov.cleanarchitectureapp.domain.model.GameDetailsInfo
 import com.nikasov.cleanarchitectureapp.domain.model.GameScreenshot
 import com.nikasov.cleanarchitectureapp.presentation.adapter.decoration.HorizontalSpaceDecoration
 import com.nikasov.cleanarchitectureapp.presentation.adapter.decoration.VerticalSpaceDecoration
+import com.nikasov.cleanarchitectureapp.presentation.adapter.game_details.FilterType
 import com.nikasov.cleanarchitectureapp.presentation.adapter.game_details.GameDetailsInfoAdapter
 import com.nikasov.cleanarchitectureapp.presentation.adapter.screenshots.GameScreenshotsAdapter
 import com.nikasov.cleanarchitectureapp.presentation.base.BaseFragment
@@ -51,7 +52,7 @@ class GameDetailsFragment: BaseFragment<FragmentGameDetailsBinding>(FragmentGame
                 layoutManager = LinearLayoutManager(requireContext())
                 addItemDecoration(VerticalSpaceDecoration())
 
-                gameDetailsInfoAdapter.onItemClick = { query ->
+                gameDetailsInfoAdapter.filterType = FilterType.Action { query ->
                     router.openGameListFragment(listOf(query))
                 }
             }

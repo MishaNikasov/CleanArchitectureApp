@@ -14,24 +14,28 @@ import com.nikasov.cleanarchitectureapp.presentation.base.IBinder
 
 class GameDetailsInfoViewHolder(
     private val binding: ItemGameDetailsInfoBinding,
-    private val onItemClick: (FilterQuery) -> Unit,
+    private val filterType: FilterType,
 ): RecyclerView.ViewHolder(binding.root), IBinder<GameDetailsInfo> {
 
     override fun bindView(model: GameDetailsInfo?, position: Int) {
         binding.apply {
             model ?: return
-
             header.text = model.header
-            with(infoItemsRecycler) {
-                model.content.forEach { infoItem ->
-                    addChip(infoItem)
-                }
+            model.content.forEach { infoItem ->
+                infoItemsChipGroup.addChip(infoItem)
             }
         }
     }
 
     private fun ChipGroup.addChip(infoItem: GameDetailsInfoItem){
-        val chip = inflater().inflate(R.layout.item_info_chip, this, false) as Chip
+        when (filterType) {
+            is FilterType.Action -> setupActionChip(this, infoItem, filterType.action)
+            FilterType.Selection -> Unit
+        }
+    }
+
+    private fun setupActionChip(chipGroup: ChipGroup, infoItem: GameDetailsInfoItem, action: (FilterQuery) -> Unit) {
+        val chip = chipGroup.inflater().inflate(R.layout.item_info_chip, chipGroup, false) as Chip
         chip.apply {
             id = View.generateViewId()
             text = infoItem.name
@@ -47,10 +51,9 @@ class GameDetailsInfoViewHolder(
                     is GameDetailsInfoItem.Tag -> FilterQuery.Tags(infoItem.slug)
                     else -> FilterQuery.Empty
                 }
-                onItemClick(query)
+                action(query)
             }
-
-            addView(this)
+            chipGroup.addView(this)
         }
     }
 }

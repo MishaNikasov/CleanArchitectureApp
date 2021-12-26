@@ -17,7 +17,7 @@
         tools:text="Header" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/infoItemsRecycler"
+        android:id="@+id/info_items_chip_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

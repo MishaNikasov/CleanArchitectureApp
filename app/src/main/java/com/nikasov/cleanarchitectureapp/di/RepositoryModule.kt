@@ -4,8 +4,10 @@ import com.nikasov.cleanarchitectureapp.data.local.dao.ScreenshotDao
 import com.nikasov.cleanarchitectureapp.data.remote.NetworkApi
 import com.nikasov.cleanarchitectureapp.data.repository.GamesRepositoryImpl
 import com.nikasov.cleanarchitectureapp.data.repository.ScreenshotRepositoryImpl
+import com.nikasov.cleanarchitectureapp.data.repository.SearchRepositoryImpl
 import com.nikasov.cleanarchitectureapp.domain.repository.GamesRepository
 import com.nikasov.cleanarchitectureapp.domain.repository.ScreenshotRepository
+import com.nikasov.cleanarchitectureapp.domain.repository.SearchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,6 +33,14 @@ object RepositoryModule {
         screenshotDao: ScreenshotDao
     ): ScreenshotRepository {
         return ScreenshotRepositoryImpl(networkApi, screenshotDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchRepository(
+        networkApi: NetworkApi
+    ): SearchRepository {
+        return SearchRepositoryImpl(networkApi)
     }
 
 }

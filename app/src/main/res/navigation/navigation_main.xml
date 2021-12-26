@@ -51,4 +51,10 @@
             app:nullable="true" />
     </fragment>
 
+    <fragment
+        android:id="@+id/filterFragment"
+        tools:layout="@layout/fragment_filter"
+        android:name="com.nikasov.cleanarchitectureapp.presentation.fragment.filter_fragment.FilterFragment"
+        android:label="FilterFragment" />
+
 </navigation>
