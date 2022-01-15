@@ -8,6 +8,7 @@ import com.nikasov.cleanarchitectureapp.domain.model.FavoriteState
 import com.nikasov.cleanarchitectureapp.domain.model.GameScreenshot
 import com.nikasov.cleanarchitectureapp.presentation.adapter.screenshots.FullscreenScreenshotAdapter
 import com.nikasov.cleanarchitectureapp.presentation.base.BaseFragment
+import com.nikasov.cleanarchitectureapp.presentation.util.DialogHelper
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -43,6 +44,7 @@ class ScreenshotsFragment : BaseFragment<FragmentScreenshotsBinding>(FragmentScr
             favoriteBtn.setOnClickListener {
                 val currentItem = screenshots[screenshotViewPager.currentItem]
                 screenshotViewModel.toggleFavorite(currentItem)
+                DialogHelper(requireContext()).deleteFromFavorite()
                 toggleFavoriteState(currentItem)
             }
         }

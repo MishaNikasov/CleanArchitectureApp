@@ -5,14 +5,14 @@ import android.content.DialogInterface
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 fun Context.showDialog(
-    msg: String,
-    title: String? = null,
+    title: String,
+    msg: String? = null,
     positiveBtn: Pair<String, (DialogInterface) -> Unit>? = null,
     negativeBtn: Pair<String, (DialogInterface) -> Unit>? = null,
     isCancelable: Boolean = true
 ) {
     val builder = MaterialAlertDialogBuilder(this)
-        .setMessage(msg)
+        .setTitle(title)
 
     positiveBtn?.let {
         builder.setPositiveButton(it.first) { dialog, _ ->
@@ -25,8 +25,8 @@ fun Context.showDialog(
         }
     }
 
-    title?.let {
-        builder.setTitle(it)
+    msg.let {
+        builder.setMessage(it)
     }
 
     builder.setCancelable(isCancelable)
