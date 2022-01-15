@@ -1,8 +1,5 @@
 package com.nikasov.cleanarchitectureapp.domain.model
 
-import androidx.annotation.DrawableRes
-import com.nikasov.cleanarchitectureapp.R
-
 sealed class GameDetailsInfoItem(
     open val id: Int,
     open val name: String,

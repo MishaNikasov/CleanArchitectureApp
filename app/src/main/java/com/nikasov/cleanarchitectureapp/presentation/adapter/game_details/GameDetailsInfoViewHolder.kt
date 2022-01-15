@@ -41,7 +41,6 @@ class GameDetailsInfoViewHolder(
             text = infoItem.name
             isClickable = true
             isCheckable = true
-            isCheckedIconVisible = false
             isFocusable = true
 
             setOnClickListener {

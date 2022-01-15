@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="ChipStyle" parent="Widget.Material3.Chip.Assist.Elevated">
+    <style name="ChipStyle" parent="Widget.Material3.Chip.Assist">
         <item name="chipBackgroundColor">@color/light_link_black_transparent</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">italic</item>

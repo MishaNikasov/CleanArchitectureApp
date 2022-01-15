@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/link_black"
+    android:background="@color/black"
     app:layoutDescription="@xml/fragment_game_details_scene">
 
     <androidx.constraintlayout.widget.Guideline

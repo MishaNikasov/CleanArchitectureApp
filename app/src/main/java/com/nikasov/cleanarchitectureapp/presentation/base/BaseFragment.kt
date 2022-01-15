@@ -11,6 +11,7 @@ import androidx.viewbinding.ViewBinding
 import com.nikasov.cleanarchitectureapp.common.utils.ErrorModel
 import com.nikasov.cleanarchitectureapp.common.extensions.hideKeyboard
 import com.nikasov.cleanarchitectureapp.common.extensions.showToast
+import com.nikasov.cleanarchitectureapp.presentation.util.ScreenSettings
 import timber.log.Timber
 
 open class BaseFragment<FragmentBinding : ViewBinding>(
@@ -18,6 +19,10 @@ open class BaseFragment<FragmentBinding : ViewBinding>(
 ) : Fragment() {
 
     private var binding: FragmentBinding? = null
+
+    open fun getScreenSettings(): ScreenSettings {
+        return ScreenSettings.default()
+    }
 
     protected fun requireBinding(): FragmentBinding {
         return checkNotNull(binding)
@@ -39,6 +44,12 @@ open class BaseFragment<FragmentBinding : ViewBinding>(
         setupViewModelCallbacks()
         setData()
         getData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val baseActivity = requireActivity() as BaseActivity<*>
+        baseActivity.setScreenSettings(getScreenSettings())
     }
 
     override fun onDestroy() {
